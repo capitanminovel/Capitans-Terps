@@ -8,162 +8,164 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:           #0c0a07;
-      --surface:      #161310;
-      --card:         #1e1a14;
-      --card-hover:   #27221a;
-      --border:       #332c22;
-      --border-hi:    #4a4030;
-      --text:         #ecdfc4;
-      --muted:        #9e8c68;
-      --faint:        #5e5038;
-      --gold:         #c8a44c;
-      --gold-hi:      #e0be70;
-      --gold-dim:     #7a6228;
-      --green:        #5c8050;
-      --green-hi:     #78a868;
-      --cured-bg:     #1a2c08; --cured-fg:    #a8cc48;
-      --growlog-bg:   #2c1e06; --growlog-fg:  #e0a030;
-      --active-bg:    #082c18; --active-fg:   #38c868;
-      --vault-bg:     #221a0e; --vault-fg:    #c09660;
+      --bg:#0c0a07; --surface:#161310; --card:#1e1a14; --card-hover:#27221a;
+      --border:#332c22; --border-hi:#4a4030;
+      --text:#ecdfc4; --muted:#9e8c68; --faint:#5e5038;
+      --gold:#c8a44c; --gold-hi:#e0be70; --gold-dim:#7a6228;
+      --green:#5c8050; --green-hi:#78a868;
+      --cured-bg:#1a2c08;   --cured-fg:#a8cc48;
+      --growlog-bg:#2c1e06; --growlog-fg:#e0a030;
+      --active-bg:#082c18;  --active-fg:#38c868;
+      --vault-bg:#221a0e;   --vault-fg:#c09660;
     }
-
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; }
+    body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; min-height:100vh; }
 
-    header {
-      background: linear-gradient(180deg, #09070400 0%, var(--surface) 100%), linear-gradient(135deg, #0c0905 0%, #1a1410 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 1.4rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      position: sticky; top: 0; z-index: 100;
-    }
-    .brand { display: flex; flex-direction: column; gap: 2px; }
-    .brand-name { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--gold-hi); letter-spacing: .01em; line-height: 1.1; }
-    .brand-tagline { font-size: .68rem; color: var(--muted); letter-spacing: .18em; text-transform: uppercase; }
-    .header-actions { display: flex; gap: .65rem; align-items: center; }
+    /* Header */
+    header { background:linear-gradient(180deg,#09070400 0%,var(--surface) 100%),linear-gradient(135deg,#0c0905 0%,#1a1410 100%); border-bottom:1px solid var(--border); padding:1.4rem 2rem; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+    .brand { display:flex; flex-direction:column; gap:2px; }
+    .brand-name { font-family:'Playfair Display',serif; font-size:1.55rem; color:var(--gold-hi); letter-spacing:.01em; line-height:1.1; }
+    .brand-tagline { font-size:.68rem; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; }
+    .header-actions { display:flex; gap:.65rem; align-items:center; }
 
-    .btn { padding: .45rem 1rem; border-radius: 6px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 500; transition: all .15s ease; line-height: 1.4; }
-    .btn-primary { background: var(--gold); color: #0c0a07; }
-    .btn-primary:hover { background: var(--gold-hi); }
-    .btn-outline { background: transparent; border: 1px solid var(--border-hi); color: var(--muted); }
-    .btn-outline:hover { border-color: var(--gold-dim); color: var(--gold); }
-    .btn-danger { background: #2c1010; border: 1px solid #5a2828; color: #d06060; }
-    .btn-danger:hover { background: #3c1818; }
-    .btn-icon { background: transparent; border: 1px solid var(--border); color: var(--faint); border-radius: 6px; padding: .4rem .6rem; cursor: pointer; font-size: 1rem; line-height: 1; transition: all .15s; }
-    .btn-icon:hover { border-color: var(--gold-dim); color: var(--gold); }
-    .btn-generate { padding: .7rem 1.6rem; background: linear-gradient(135deg, var(--gold-dim), var(--gold)); color: #0c0a07; border: none; border-radius: 8px; font-size: .88rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all .2s ease; display: inline-flex; align-items: center; gap: .5rem; }
-    .btn-generate:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,164,76,.3); }
-    .btn-generate:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+    /* Buttons */
+    .btn { padding:.45rem 1rem; border-radius:6px; border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:.82rem; font-weight:500; transition:all .15s ease; line-height:1.4; }
+    .btn-outline { background:transparent; border:1px solid var(--border-hi); color:var(--muted); }
+    .btn-outline:hover { border-color:var(--gold-dim); color:var(--gold); }
+    .btn-danger { background:#2c1010; border:1px solid #5a2828; color:#d06060; }
+    .btn-danger:hover { background:#3c1818; }
+    .btn-icon { background:transparent; border:1px solid var(--border); color:var(--faint); border-radius:6px; padding:.4rem .6rem; cursor:pointer; font-size:1rem; line-height:1; transition:all .15s; }
+    .btn-icon:hover { border-color:var(--gold-dim); color:var(--gold); }
+    .btn-generate { padding:.7rem 1.6rem; background:linear-gradient(135deg,var(--gold-dim),var(--gold)); color:#0c0a07; border:none; border-radius:8px; font-size:.88rem; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif; transition:all .2s ease; display:inline-flex; align-items:center; gap:.5rem; }
+    .btn-generate:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(200,164,76,.3); }
+    .btn-generate:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
 
-    .filter-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: .6rem 2rem; display: flex; gap: .45rem; align-items: center; overflow-x: auto; }
-    .filter-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-right: .2rem; white-space: nowrap; flex-shrink: 0; }
-    .filter-btn { padding: .3rem .85rem; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: .76rem; font-weight: 500; font-family: 'Inter', sans-serif; transition: all .15s ease; white-space: nowrap; flex-shrink: 0; }
-    .filter-btn:hover { border-color: var(--border-hi); color: var(--text); }
-    .filter-btn.active { background: var(--card); border-color: var(--gold-dim); color: var(--gold); }
-    .filter-btn[data-filter="Active"].active    { background: var(--active-bg);  border-color: var(--active-fg);  color: var(--active-fg); }
-    .filter-btn[data-filter="Grow Log"].active  { background: var(--growlog-bg); border-color: var(--growlog-fg); color: var(--growlog-fg); }
-    .filter-btn[data-filter="Cured"].active     { background: var(--cured-bg);   border-color: var(--cured-fg);   color: var(--cured-fg); }
-    .filter-btn[data-filter="Vault"].active     { background: var(--vault-bg);   border-color: var(--vault-fg);   color: var(--vault-fg); }
-    .strain-count-badge { margin-left: auto; flex-shrink: 0; font-size: .65rem; color: var(--faint); font-family: 'JetBrains Mono', monospace; letter-spacing: .04em; }
+    /* Filter bar */
+    .filter-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:.6rem 2rem; display:flex; gap:.45rem; align-items:center; overflow-x:auto; }
+    .filter-label { font-size:.65rem; text-transform:uppercase; letter-spacing:.12em; color:var(--faint); margin-right:.2rem; white-space:nowrap; flex-shrink:0; }
+    .filter-btn { padding:.3rem .85rem; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; font-size:.76rem; font-weight:500; font-family:'Inter',sans-serif; transition:all .15s ease; white-space:nowrap; flex-shrink:0; }
+    .filter-btn:hover { border-color:var(--border-hi); color:var(--text); }
+    .filter-btn.active { background:var(--card); border-color:var(--gold-dim); color:var(--gold); }
+    .filter-btn[data-filter="Active"].active    { background:var(--active-bg);  border-color:var(--active-fg);  color:var(--active-fg); }
+    .filter-btn[data-filter="Grow Log"].active  { background:var(--growlog-bg); border-color:var(--growlog-fg); color:var(--growlog-fg); }
+    .filter-btn[data-filter="Cured"].active     { background:var(--cured-bg);   border-color:var(--cured-fg);   color:var(--cured-fg); }
+    .filter-btn[data-filter="Vault"].active     { background:var(--vault-bg);   border-color:var(--vault-fg);   color:var(--vault-fg); }
+    .strain-count-badge { margin-left:auto; flex-shrink:0; font-size:.65rem; color:var(--faint); font-family:'JetBrains Mono',monospace; letter-spacing:.04em; }
 
-    main { padding: 1.75rem 2rem 3rem; max-width: 1400px; margin: 0 auto; }
-    .strain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+    /* Grid */
+    main { padding:1.75rem 2rem 3rem; max-width:1400px; margin:0 auto; }
+    .strain-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:1rem; }
 
-    .strain-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.1rem; cursor: pointer; transition: all .18s ease; display: flex; flex-direction: column; gap: .55rem; }
-    .strain-card:hover { background: var(--card-hover); border-color: var(--border-hi); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.5); }
-    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; }
-    .card-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text); line-height: 1.3; }
-    .card-breeder { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-top: 2px; }
-    .status-tag { display: inline-flex; align-items: center; padding: .18rem .55rem; border-radius: 10px; font-size: .62rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
-    .status-tag.Cured    { background: var(--cured-bg);   color: var(--cured-fg); }
-    .status-tag.Grow-Log { background: var(--growlog-bg); color: var(--growlog-fg); }
-    .status-tag.Active   { background: var(--active-bg);  color: var(--active-fg); }
-    .status-tag.Vault    { background: var(--vault-bg);   color: var(--vault-fg); }
-    .card-notes { font-size: .74rem; color: var(--muted); font-style: italic; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; border-top: 1px solid var(--border); padding-top: .5rem; }
-    .card-footer { display: flex; justify-content: space-between; align-items: center; }
-    .card-date { font-size: .65rem; color: var(--faint); font-family: 'JetBrains Mono', monospace; }
-    .card-researched { font-size: .62rem; color: var(--green-hi); display: flex; align-items: center; gap: 3px; letter-spacing: .04em; }
+    /* Card */
+    .strain-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1.2rem 1.1rem; cursor:pointer; transition:all .18s ease; display:flex; flex-direction:column; gap:.55rem; }
+    .strain-card:hover { background:var(--card-hover); border-color:var(--border-hi); transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,.5); }
+    .card-top { display:flex; justify-content:space-between; align-items:flex-start; gap:.5rem; }
+    .card-name { font-family:'Playfair Display',serif; font-size:1rem; color:var(--text); line-height:1.3; }
+    .card-breeder { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-top:2px; }
+    .status-tag { display:inline-flex; align-items:center; padding:.18rem .55rem; border-radius:10px; font-size:.62rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; white-space:nowrap; flex-shrink:0; }
+    .status-tag.Cured    { background:var(--cured-bg);   color:var(--cured-fg); }
+    .status-tag.Grow-Log { background:var(--growlog-bg); color:var(--growlog-fg); }
+    .status-tag.Active   { background:var(--active-bg);  color:var(--active-fg); }
+    .status-tag.Vault    { background:var(--vault-bg);   color:var(--vault-fg); }
+    .card-notes { font-size:.74rem; color:var(--muted); font-style:italic; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; border-top:1px solid var(--border); padding-top:.5rem; }
+    .card-footer { display:flex; justify-content:space-between; align-items:center; }
+    .card-date { font-size:.65rem; color:var(--faint); font-family:'JetBrains Mono',monospace; }
+    .card-researched { font-size:.62rem; color:var(--green-hi); display:flex; align-items:center; gap:3px; letter-spacing:.04em; }
 
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.78); backdrop-filter: blur(5px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-    .modal-overlay.hidden { display: none; }
-    .modal-box { background: var(--surface); border: 1px solid var(--border-hi); border-radius: 14px; width: 100%; max-width: 780px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,.65); }
-    .modal-header { padding: 1.4rem 1.6rem 1.1rem; border-bottom: 1px solid var(--border); flex-shrink: 0; display: flex; flex-direction: column; gap: .6rem; }
-    .modal-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
-    .modal-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text); line-height: 1.2; }
-    .modal-breeder { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-top: 3px; }
-    .modal-close { background: transparent; border: none; color: var(--faint); cursor: pointer; font-size: 1.2rem; padding: .2rem; line-height: 1; flex-shrink: 0; transition: color .15s; }
-    .modal-close:hover { color: var(--text); }
-    .modal-controls { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
-    .status-update-group { display: flex; align-items: center; gap: .45rem; }
-    select { background: var(--card); color: var(--text); border: 1px solid var(--border-hi); border-radius: 6px; padding: .3rem .7rem; font-size: .78rem; font-family: 'Inter', sans-serif; cursor: pointer; }
-    select:focus { outline: 1px solid var(--gold-dim); }
+    /* Modal */
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.78); backdrop-filter:blur(5px); z-index:200; display:flex; align-items:center; justify-content:center; padding:1rem; }
+    .modal-overlay.hidden { display:none; }
+    .modal-box { background:var(--surface); border:1px solid var(--border-hi); border-radius:14px; width:100%; max-width:780px; max-height:90vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,.65); }
+    .modal-header { padding:1.4rem 1.6rem 1.1rem; border-bottom:1px solid var(--border); flex-shrink:0; display:flex; flex-direction:column; gap:.6rem; }
+    .modal-header-row { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+    .modal-name { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text); line-height:1.2; }
+    .modal-breeder { font-size:.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-top:3px; }
+    .modal-close { background:transparent; border:none; color:var(--faint); cursor:pointer; font-size:1.2rem; padding:.2rem; line-height:1; flex-shrink:0; transition:color .15s; }
+    .modal-close:hover { color:var(--text); }
+    .modal-controls { display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+    .status-update-group { display:flex; align-items:center; gap:.45rem; }
+    select { background:var(--card); color:var(--text); border:1px solid var(--border-hi); border-radius:6px; padding:.3rem .7rem; font-size:.78rem; font-family:'Inter',sans-serif; cursor:pointer; }
+    select:focus { outline:1px solid var(--gold-dim); }
 
-    .research-tabs { display: flex; border-bottom: 1px solid var(--border); overflow-x: auto; flex-shrink: 0; background: var(--surface); padding: 0 1rem; scrollbar-width: none; }
-    .research-tabs::-webkit-scrollbar { display: none; }
-    .tab-btn { padding: .7rem .9rem; font-size: .76rem; font-weight: 500; color: var(--muted); cursor: pointer; border: none; background: transparent; border-bottom: 2px solid transparent; white-space: nowrap; transition: all .15s; font-family: 'Inter', sans-serif; letter-spacing: .02em; flex-shrink: 0; }
-    .tab-btn:hover { color: var(--text); }
-    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    /* Research tabs */
+    .research-tabs { display:flex; border-bottom:1px solid var(--border); overflow-x:auto; flex-shrink:0; background:var(--surface); padding:0 1rem; scrollbar-width:none; }
+    .research-tabs::-webkit-scrollbar { display:none; }
+    .tab-btn { padding:.7rem .9rem; font-size:.76rem; font-weight:500; color:var(--muted); cursor:pointer; border:none; background:transparent; border-bottom:2px solid transparent; white-space:nowrap; transition:all .15s; font-family:'Inter',sans-serif; letter-spacing:.02em; flex-shrink:0; }
+    .tab-btn:hover { color:var(--text); }
+    .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
 
-    .modal-body { overflow-y: auto; flex: 1; min-height: 0; }
-    .research-panel { padding: 1.5rem 1.6rem; display: none; }
-    .research-panel.active { display: block; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--gold-hi); margin-bottom: .75rem; display: flex; align-items: center; gap: .45rem; }
-    .research-text { color: var(--text); line-height: 1.8; font-size: .88rem; }
-    .research-meta { margin-top: 1.2rem; padding-top: .75rem; border-top: 1px solid var(--border); font-size: .66rem; color: var(--faint); font-family: 'JetBrains Mono', monospace; }
+    /* Modal body + panels */
+    .modal-body { overflow-y:auto; flex:1; min-height:0; }
+    .research-panel { padding:1.5rem 1.6rem; display:none; }
+    .research-panel.active { display:block; }
+    .section-title { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--gold-hi); margin-bottom:.75rem; display:flex; align-items:center; gap:.45rem; }
+    .research-text { color:var(--text); line-height:1.8; font-size:.88rem; }
+    .research-meta { margin-top:1.2rem; padding-top:.75rem; border-top:1px solid var(--border); font-size:.66rem; color:var(--faint); font-family:'JetBrains Mono',monospace; }
 
-    .generate-panel { padding: 3rem 1.6rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
-    .generate-glyph { font-size: 2.4rem; opacity: .45; }
-    .generate-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--muted); }
-    .generate-desc { font-size: .82rem; color: var(--faint); max-width: 380px; line-height: 1.6; }
+    /* Two-field layout (lineage / misc side by side blocks) */
+    .research-block { margin-bottom:1.25rem; }
+    .research-block:last-child { margin-bottom:0; }
+    .research-block-label { font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:.3rem; font-weight:500; }
 
-    .loading-panel { padding: 3.5rem 1.6rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
-    .spinner { width: 38px; height: 38px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .85s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-text { color: var(--muted); font-size: .88rem; }
-    .loading-sub  { color: var(--faint); font-size: .76rem; }
+    /* Pill lists (therapeutic / negative) */
+    .pill-list { display:flex; flex-wrap:wrap; gap:.35rem; }
+    .pill { padding:.2rem .6rem; border-radius:10px; font-size:.72rem; font-weight:500; }
+    .pill-green { background:var(--active-bg); color:var(--active-fg); }
+    .pill-red   { background:#2c1010; color:#d06060; }
 
-    .notes-textarea { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: .86rem; font-family: 'Inter', sans-serif; padding: .75rem .9rem; resize: vertical; min-height: 120px; line-height: 1.65; }
-    .notes-textarea:focus { outline: 1px solid var(--gold-dim); border-color: var(--gold-dim); }
-    .notes-textarea::placeholder { color: var(--faint); }
-    .notes-actions { display: flex; justify-content: flex-end; gap: .5rem; margin-top: .7rem; }
+    /* Mood bars */
+    .mood-grid { display:flex; flex-direction:column; gap:.7rem; }
+    .mood-row { display:flex; align-items:center; gap:.75rem; }
+    .mood-label { font-size:.75rem; color:var(--muted); width:110px; flex-shrink:0; white-space:nowrap; }
+    .mood-bar-wrap { flex:1; background:var(--border); border-radius:4px; height:7px; overflow:hidden; }
+    .mood-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--gold-dim),var(--gold)); transition:width .4s ease; }
+    .mood-score { font-size:.72rem; color:var(--faint); width:22px; text-align:right; font-family:'JetBrains Mono',monospace; flex-shrink:0; }
 
-    .add-modal-box { max-width: 460px; }
-    .settings-modal-box { max-width: 480px; }
-    .modal-form-body { padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
-    .form-group { display: flex; flex-direction: column; gap: .3rem; }
-    .form-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .09em; font-weight: 500; }
-    .form-input { background: var(--card); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: .88rem; font-family: 'Inter', sans-serif; padding: .55rem .85rem; }
-    .form-input:focus { outline: 1px solid var(--gold-dim); border-color: var(--gold-dim); }
-    .form-input::placeholder { color: var(--faint); }
-    .modal-form-footer { padding: .9rem 1.6rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: .6rem; }
+    /* Generate / loading panels */
+    .generate-panel { padding:3rem 1.6rem; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.1rem; }
+    .generate-glyph { font-size:2.4rem; opacity:.45; }
+    .generate-title { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--muted); }
+    .generate-desc { font-size:.82rem; color:var(--faint); max-width:380px; line-height:1.6; }
+    .loading-panel { padding:3.5rem 1.6rem; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.1rem; }
+    .spinner { width:38px; height:38px; border:3px solid var(--border); border-top-color:var(--gold); border-radius:50%; animation:spin .85s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .loading-text { color:var(--muted); font-size:.88rem; }
+    .loading-sub  { color:var(--faint); font-size:.76rem; }
 
-    .key-status { font-size: .72rem; padding: .3rem .7rem; border-radius: 12px; font-weight: 500; }
-    .key-status.set   { background: var(--active-bg); color: var(--active-fg); }
-    .key-status.unset { background: var(--vault-bg);  color: var(--vault-fg); }
-    .key-hint { font-size: .74rem; color: var(--faint); line-height: 1.5; }
+    /* Notes */
+    .notes-textarea { width:100%; background:var(--card); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:.86rem; font-family:'Inter',sans-serif; padding:.75rem .9rem; resize:vertical; min-height:120px; line-height:1.65; }
+    .notes-textarea:focus { outline:1px solid var(--gold-dim); border-color:var(--gold-dim); }
+    .notes-textarea::placeholder { color:var(--faint); }
+    .notes-actions { display:flex; justify-content:flex-end; gap:.5rem; margin-top:.7rem; }
 
-    .empty-state { grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; }
-    .empty-glyph { font-size: 2.2rem; opacity: .35; margin-bottom: .75rem; }
-    .empty-text  { font-size: .85rem; color: var(--faint); }
+    /* Settings modal */
+    .settings-modal-box { max-width:460px; }
+    .modal-form-body { padding:1.4rem 1.6rem; display:flex; flex-direction:column; gap:1rem; }
+    .form-group { display:flex; flex-direction:column; gap:.3rem; }
+    .form-label { font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.09em; font-weight:500; }
+    .form-input { background:var(--card); border:1px solid var(--border); border-radius:6px; color:var(--text); font-size:.88rem; font-family:'Inter',sans-serif; padding:.55rem .85rem; }
+    .form-input:focus { outline:1px solid var(--gold-dim); border-color:var(--gold-dim); }
+    .form-input::placeholder { color:var(--faint); }
+    .modal-form-footer { padding:.9rem 1.6rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:.6rem; }
+    .key-hint { font-size:.74rem; color:var(--faint); line-height:1.5; }
 
-    footer { border-top: 1px solid var(--border); padding: 1.4rem 2rem; text-align: center; margin-top: 1rem; }
-    .footer-text { font-size: .68rem; color: var(--faint); letter-spacing: .08em; text-transform: uppercase; }
-    .sep { display: inline-block; margin: 0 .45rem; opacity: .4; }
+    /* Empty / footer / toast */
+    .empty-state { grid-column:1/-1; text-align:center; padding:4rem 2rem; }
+    .empty-glyph { font-size:2.2rem; opacity:.35; margin-bottom:.75rem; }
+    .empty-text  { font-size:.85rem; color:var(--faint); }
+    footer { border-top:1px solid var(--border); padding:1.4rem 2rem; text-align:center; margin-top:1rem; }
+    .footer-text { font-size:.68rem; color:var(--faint); letter-spacing:.08em; text-transform:uppercase; }
+    .sep { display:inline-block; margin:0 .45rem; opacity:.4; }
+    .toast { position:fixed; bottom:1.5rem; right:1.5rem; background:var(--card-hover); border:1px solid var(--border-hi); color:var(--text); padding:.65rem 1.1rem; border-radius:8px; font-size:.82rem; z-index:999; box-shadow:0 8px 24px rgba(0,0,0,.4); transition:opacity .3s ease; }
+    .toast.hidden { opacity:0; pointer-events:none; }
 
-    .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--card-hover); border: 1px solid var(--border-hi); color: var(--text); padding: .65rem 1.1rem; border-radius: 8px; font-size: .82rem; z-index: 999; box-shadow: 0 8px 24px rgba(0,0,0,.4); transition: opacity .3s ease; }
-    .toast.hidden { opacity: 0; pointer-events: none; }
-
-    @media (max-width: 640px) {
-      header { padding: 1rem; }
-      .brand-name { font-size: 1.25rem; }
-      main { padding: 1rem 1rem 2.5rem; }
-      .filter-bar { padding: .6rem 1rem; }
-      .strain-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; }
-      .modal-box { max-height: 95vh; }
-      .modal-name { font-size: 1.25rem; }
+    @media (max-width:640px) {
+      header { padding:1rem; } .brand-name { font-size:1.25rem; }
+      main { padding:1rem 1rem 2.5rem; } .filter-bar { padding:.6rem 1rem; }
+      .strain-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:.75rem; }
+      .modal-box { max-height:95vh; } .modal-name { font-size:1.25rem; }
+      .mood-label { width:90px; font-size:.68rem; }
     }
   </style>
 </head>
@@ -176,17 +178,16 @@
   </div>
   <div class="header-actions">
     <button class="btn-icon" id="key-indicator" onclick="openSettings()" title="API Key Settings">&#9881;</button>
-    <button class="btn btn-primary" onclick="openAddModal()">+ Add Strain</button>
   </div>
 </header>
 
 <div class="filter-bar">
   <span class="filter-label">Filter</span>
-  <button class="filter-btn active" data-filter="all"      onclick="setFilter('all', this)">All</button>
-  <button class="filter-btn"        data-filter="Active"   onclick="setFilter('Active', this)">Active</button>
-  <button class="filter-btn"        data-filter="Grow Log" onclick="setFilter('Grow Log', this)">Grow Log</button>
-  <button class="filter-btn"        data-filter="Cured"    onclick="setFilter('Cured', this)">Cured</button>
-  <button class="filter-btn"        data-filter="Vault"    onclick="setFilter('Vault', this)">Vault</button>
+  <button class="filter-btn active" data-filter="all"      onclick="setFilter('all',this)">All</button>
+  <button class="filter-btn"        data-filter="Active"   onclick="setFilter('Active',this)">Active</button>
+  <button class="filter-btn"        data-filter="Grow Log" onclick="setFilter('Grow Log',this)">Grow Log</button>
+  <button class="filter-btn"        data-filter="Cured"    onclick="setFilter('Cured',this)">Cured</button>
+  <button class="filter-btn"        data-filter="Vault"    onclick="setFilter('Vault',this)">Vault</button>
   <span class="strain-count-badge" id="strain-count"></span>
 </div>
 
@@ -196,7 +197,7 @@
   </div>
 </main>
 
-<!-- Detail Modal -->
+<!-- Detail modal -->
 <div class="modal-overlay hidden" id="detail-modal">
   <div class="modal-box">
     <div class="modal-header">
@@ -222,7 +223,7 @@
       <button class="tab-btn active" data-tab="genetics" onclick="switchTab('genetics',this)">&#x1F9EC; Genetics</button>
       <button class="tab-btn" data-tab="terpenes"        onclick="switchTab('terpenes',this)">&#x1F33F; Terpenes</button>
       <button class="tab-btn" data-tab="effects"         onclick="switchTab('effects',this)">&#x2728; Effects</button>
-      <button class="tab-btn" data-tab="flavor"          onclick="switchTab('flavor',this)">&#x1F443; Flavor &amp; Aroma</button>
+      <button class="tab-btn" data-tab="moods"           onclick="switchTab('moods',this)">&#x1F4CA; Moods</button>
       <button class="tab-btn" data-tab="grow"            onclick="switchTab('grow',this)">&#x1FAB4; Grow Notes</button>
       <button class="tab-btn" data-tab="rosin"           onclick="switchTab('rosin',this)">&#x1F36F; Rosin</button>
       <button class="tab-btn" data-tab="notes"           onclick="switchTab('notes',this)">&#x1F4DD; My Notes</button>
@@ -231,36 +232,12 @@
   </div>
 </div>
 
-<!-- Add Strain Modal -->
-<div class="modal-overlay hidden" id="add-modal">
-  <div class="modal-box add-modal-box">
-    <div class="modal-header">
-      <div class="modal-header-row">
-        <div class="modal-name" style="font-size:1.3rem">Add New Strain</div>
-        <button class="modal-close" onclick="closeAddModal()">&#x2715;</button>
-      </div>
-    </div>
-    <form id="add-form" onsubmit="submitAddStrain(event)">
-      <div class="modal-form-body">
-        <div class="form-group"><label class="form-label">Strain Name *</label><input class="form-input" type="text" name="name" placeholder="e.g. Triangle Kush" required></div>
-        <div class="form-group"><label class="form-label">Breeder *</label><input class="form-input" type="text" name="breeder" placeholder="e.g. Archive Seed Bank" required></div>
-        <div class="form-group"><label class="form-label">Status</label><select class="form-input" name="status"><option value="Vault">Vault</option><option value="Active">Active</option><option value="Grow Log">Grow Log</option><option value="Cured">Cured</option></select></div>
-        <div class="form-group"><label class="form-label">Notes</label><textarea class="form-input notes-textarea" name="notes" placeholder="Cross info, pheno notes, acquisition source&hellip;" style="min-height:80px;resize:vertical"></textarea></div>
-      </div>
-      <div class="modal-form-footer">
-        <button type="button" class="btn btn-outline" onclick="closeAddModal()">Cancel</button>
-        <button type="submit" class="btn btn-primary">Add Strain</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Settings Modal -->
+<!-- Settings modal -->
 <div class="modal-overlay hidden" id="settings-modal">
   <div class="modal-box settings-modal-box">
     <div class="modal-header">
       <div class="modal-header-row">
-        <div class="modal-name" style="font-size:1.3rem">&#9881; Settings</div>
+        <div class="modal-name" style="font-size:1.3rem">&#9881; API Key</div>
         <button class="modal-close" onclick="closeSettings()">&#x2715;</button>
       </div>
     </div>
@@ -268,14 +245,14 @@
       <div class="form-group">
         <label class="form-label">Anthropic API Key</label>
         <input class="form-input" type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off">
-        <div class="key-hint" style="margin-top:.4rem">Stored only in your browser's localStorage &mdash; never sent anywhere except Anthropic's API. Get yours at console.anthropic.com.</div>
+        <div class="key-hint" style="margin-top:.4rem">Stored in your browser only &mdash; never committed to the repo. Get yours at console.anthropic.com.</div>
       </div>
     </div>
     <div class="modal-form-footer">
-      <button class="btn btn-danger" onclick="clearApiKey()">Clear Key</button>
+      <button class="btn btn-danger" onclick="clearApiKey()">Clear</button>
       <div style="display:flex;gap:.5rem">
         <button class="btn btn-outline" onclick="closeSettings()">Cancel</button>
-        <button class="btn btn-primary" onclick="saveApiKey()">Save Key</button>
+        <button class="btn btn-outline" onclick="saveApiKey()" style="border-color:var(--gold-dim);color:var(--gold)">Save</button>
       </div>
     </div>
   </div>
@@ -285,10 +262,7 @@
 
 <footer>
   <div class="footer-text">
-    Captain's Terps Grows
-    <span class="sep">&middot;</span> MN Legal
-    <span class="sep">&middot;</span> Personal Use Only
-    <span class="sep">&middot;</span> Research powered by Claude AI
+    Captain's Terps Grows <span class="sep">&middot;</span> MN Legal <span class="sep">&middot;</span> Personal Use Only <span class="sep">&middot;</span> Research powered by Claude AI
   </div>
 </footer>
 
@@ -300,14 +274,25 @@ const LS_RESEARCH = 'ctg_research';
 const LS_APIKEY   = 'ctg_apikey';
 
 const DEFAULT_STRAINS = [
-  { id:'ocifer',               name:'Ocifer',               breeder:'Brothers Grimm',  status:'Vault',    notes:'',                              added:'2026-05-27' },
-  { id:'pasture-bedtime',      name:'Pasture Bedtime',      breeder:'Solfire Gardens', status:'Vault',    notes:'',                              added:'2026-05-27' },
-  { id:'mind-flayer-s1',       name:'Mind Flayer S1',       breeder:'Solfire Gardens', status:'Vault',    notes:'',                              added:'2026-05-27' },
-  { id:'strawn-johnson',       name:'Strawn Johnson',       breeder:'Solfire Gardens', status:'Vault',    notes:'',                              added:'2026-05-27' },
-  { id:'mandarin-cookies-v3',  name:'Mandarin Cookies V3',  breeder:'Ethos Genetics',  status:'Vault',    notes:'',                              added:'2026-05-27' },
+  { id:'ocifer',               name:'Ocifer',               breeder:'Brothers Grimm',  status:'Vault',    notes:'',                               added:'2026-05-27' },
+  { id:'pasture-bedtime',      name:'Pasture Bedtime',      breeder:'Solfire Gardens', status:'Vault',    notes:'',                               added:'2026-05-27' },
+  { id:'mind-flayer-s1',       name:'Mind Flayer S1',       breeder:'Solfire Gardens', status:'Vault',    notes:'',                               added:'2026-05-27' },
+  { id:'strawn-johnson',       name:'Strawn Johnson',       breeder:'Solfire Gardens', status:'Vault',    notes:'',                               added:'2026-05-27' },
+  { id:'mandarin-cookies-v3',  name:'Mandarin Cookies V3',  breeder:'Ethos Genetics',  status:'Vault',    notes:'',                               added:'2026-05-27' },
   { id:'cotton-candy-cookies', name:'Cotton Candy Cookies', breeder:'Ethos Genetics',  status:'Vault',    notes:'Cross: Grape x Mandarin Cookies', added:'2026-05-27' },
-  { id:'spicy-guava',          name:'Spicy Guava',          breeder:'Elev8 Seeds',     status:'Vault',    notes:'',                              added:'2026-05-27' },
-  { id:'blueberry-pie',        name:'Blueberry Pie',        breeder:'Elev8 Seeds',     status:'Vault',    notes:'',                              added:'2026-05-27' },
+  { id:'spicy-guava',          name:'Spicy Guava',          breeder:'Elev8 Seeds',     status:'Vault',    notes:'',                               added:'2026-05-27' },
+  { id:'blueberry-pie',        name:'Blueberry Pie',        breeder:'Elev8 Seeds',     status:'Vault',    notes:'',                               added:'2026-05-27' },
+];
+
+const MOODS = [
+  { key:'wind_down',     label:'Wind Down'     },
+  { key:'anxiety_relief',label:'Anxiety Relief'},
+  { key:'lift_up',       label:'Lift Up'       },
+  { key:'get_creative',  label:'Get Creative'  },
+  { key:'get_social',    label:'Get Social'    },
+  { key:'pain_body',     label:'Pain & Body'   },
+  { key:'just_happy',    label:'Just Happy'    },
+  { key:'aphrodisiac',   label:'Aphrodisiac'   },
 ];
 
 let allStrains    = [];
@@ -315,14 +300,12 @@ let researchCache = {};
 let currentFilter = 'all';
 let currentId     = null;
 
-// ── Storage helpers ──────────────────────────────────────
-function loadStrains()   { try { return JSON.parse(localStorage.getItem(LS_STRAINS))  || null; } catch { return null; } }
-function saveStrains()   { localStorage.setItem(LS_STRAINS,  JSON.stringify(allStrains)); }
-function loadResearch()  { try { return JSON.parse(localStorage.getItem(LS_RESEARCH)) || {}; }  catch { return {}; } }
-function saveResearch()  { localStorage.setItem(LS_RESEARCH, JSON.stringify(researchCache)); }
-function getApiKey()     { return localStorage.getItem(LS_APIKEY) || ''; }
+function loadStrains()  { try { return JSON.parse(localStorage.getItem(LS_STRAINS))  || null; } catch { return null; } }
+function saveStrains()  { localStorage.setItem(LS_STRAINS,  JSON.stringify(allStrains)); }
+function loadResearch() { try { return JSON.parse(localStorage.getItem(LS_RESEARCH)) || {}; }  catch { return {}; } }
+function saveResearch() { localStorage.setItem(LS_RESEARCH, JSON.stringify(researchCache)); }
+function getApiKey()    { return localStorage.getItem(LS_APIKEY) || ''; }
 
-// ── Init ─────────────────────────────────────────────────
 function init() {
   const saved = loadStrains();
   allStrains    = saved || JSON.parse(JSON.stringify(DEFAULT_STRAINS));
@@ -332,7 +315,7 @@ function init() {
   renderGrid();
 }
 
-// ── Grid ──────────────────────────────────────────────────
+// ── Grid ─────────────────────────────────────────────────────────────
 function renderGrid() {
   const grid = document.getElementById('strain-grid');
   const ce   = document.getElementById('strain-count');
@@ -345,6 +328,7 @@ function renderGrid() {
   grid.innerHTML = strains.map(s => {
     const sc  = s.status.replace(' ', '-');
     const res = researchCache[s.id];
+    const topMood = res?.mood_ratings ? getTopMood(res.mood_ratings) : null;
     return `<div class="strain-card" onclick="openDetail('${s.id}')">
       <div class="card-top">
         <div><div class="card-name">${esc(s.name)}</div><div class="card-breeder">${esc(s.breeder)}</div></div>
@@ -353,10 +337,17 @@ function renderGrid() {
       ${s.notes ? `<div class="card-notes">${esc(s.notes)}</div>` : ''}
       <div class="card-footer">
         <span class="card-date">${s.added}</span>
-        ${res ? '<span class="card-researched">&#x2726; Researched</span>' : ''}
+        ${topMood ? `<span class="card-researched">&#x2726; ${esc(topMood)}</span>` : ''}
       </div>
     </div>`;
   }).join('');
+}
+
+function getTopMood(ratings) {
+  const top = Object.entries(ratings).sort((a,b) => b[1]-a[1])[0];
+  if (!top) return null;
+  const mood = MOODS.find(m => m.key === top[0]);
+  return mood ? mood.label : null;
 }
 
 function setFilter(f, btn) {
@@ -366,7 +357,7 @@ function setFilter(f, btn) {
   renderGrid();
 }
 
-// ── Detail modal ──────────────────────────────────────────
+// ── Detail modal ─────────────────────────────────────────────────────
 function openDetail(id) {
   currentId = id;
   const strain = allStrains.find(s => s.id === id);
@@ -398,7 +389,7 @@ function showGeneratePanel(strain) {
     <div class="generate-panel">
       <div class="generate-glyph">&#x1F52C;</div>
       <div class="generate-title">No research yet</div>
-      <div class="generate-desc">Generate a full profile for <strong style="color:var(--text)">${esc(strain.name)}</strong> covering genetics, terpenes, effects, grow notes, and rosin extraction.</div>
+      <div class="generate-desc">Generate a full profile for <strong style="color:var(--text)">${esc(strain.name)}</strong> — genetics, terpenes, effects, mood ratings, grow notes, and rosin extraction.</div>
       <button class="btn-generate" onclick="generateResearch()">&#x2726;&nbsp;Generate Research</button>
     </div>
     <div style="padding:0 1.6rem 1.5rem;border-top:1px solid var(--border);padding-top:1.25rem">
@@ -413,26 +404,84 @@ function showGeneratePanel(strain) {
 function renderResearch(r, strain) {
   const tabs    = document.getElementById('research-tabs');
   const body    = document.getElementById('modal-body');
-  const genDate = r.generated_at ? new Date(r.generated_at).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }) : '&#x2014;';
-  const sections = [
-    { id:'genetics', icon:'&#x1F9EC;', title:'Genetics & Lineage',  key:'genetics_lineage' },
-    { id:'terpenes', icon:'&#x1F33F;', title:'Terpene Profile',     key:'terpene_profile'  },
-    { id:'effects',  icon:'&#x2728;',  title:'Effects',             key:'effects'          },
-    { id:'flavor',   icon:'&#x1F443;', title:'Flavor & Aroma',      key:'flavor_aroma'     },
-    { id:'grow',     icon:'&#x1FAB4;', title:'Grow Notes',          key:'grow_notes'       },
-    { id:'rosin',    icon:'&#x1F36F;', title:'Rosin & Extraction',  key:'rosin_extraction' },
-  ];
-  let html = sections.map(s => `
-    <div class="research-panel${s.id === 'genetics' ? ' active' : ''}" id="panel-${s.id}">
-      <div class="section-title">${s.icon}&nbsp;${s.title}</div>
-      <div class="research-text">${esc(r[s.key] || '&#x2014;')}</div>
-      ${s.id === 'rosin' ? `<div class="research-meta">Generated ${genDate} &middot; Claude AI</div>` : ''}
-    </div>`).join('');
-  html += `<div class="research-panel" id="panel-notes">
-    <div class="section-title">&#x1F4DD;&nbsp;My Notes</div>
-    <textarea class="notes-textarea" id="notes-main" placeholder="Personal grow notes&hellip;">${esc(strain.notes || '')}</textarea>
-    <div class="notes-actions"><button class="btn btn-outline" onclick="saveNotes()">Save Notes</button></div>
-  </div>`;
+  const genDate = r.generated_at ? new Date(r.generated_at).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : '&mdash;';
+  const mr = r.mood_ratings || {};
+
+  const moodBars = MOODS.map(m => {
+    const score = mr[m.key] || 0;
+    const pct   = (score / 10) * 100;
+    return `<div class="mood-row">
+      <span class="mood-label">${esc(m.label)}</span>
+      <div class="mood-bar-wrap"><div class="mood-bar-fill" style="width:${pct}%"></div></div>
+      <span class="mood-score">${score}</span>
+    </div>`;
+  }).join('');
+
+  const therapeuticPills = (r.therapeutic || '').split(',').map(t => t.trim()).filter(Boolean)
+    .map(t => `<span class="pill pill-green">${esc(t)}</span>`).join('');
+  const negativePills = (r.negative || '').split(',').map(t => t.trim()).filter(Boolean)
+    .map(t => `<span class="pill pill-red">${esc(t)}</span>`).join('');
+
+  let html = `
+    <div class="research-panel active" id="panel-genetics">
+      <div class="research-block">
+        <div class="section-title">&#x1F9EC;&nbsp;Genetics &amp; Lineage</div>
+        <div class="research-text">${esc(r.lineage || '&mdash;')}</div>
+      </div>
+      <div class="research-block" style="margin-top:1.1rem">
+        <div class="research-block-label">Breeder Notes</div>
+        <div class="research-text">${esc(r.misc || '&mdash;')}</div>
+      </div>
+    </div>
+
+    <div class="research-panel" id="panel-terpenes">
+      <div class="research-block">
+        <div class="section-title">&#x1F33F;&nbsp;Terpene Profile</div>
+        <div class="research-text">${esc(r.terpene_profile || '&mdash;')}</div>
+      </div>
+      <div class="research-block" style="margin-top:1.1rem">
+        <div class="research-block-label">Aroma</div>
+        <div class="research-text">${esc(r.aroma || '&mdash;')}</div>
+      </div>
+    </div>
+
+    <div class="research-panel" id="panel-effects">
+      <div class="research-block">
+        <div class="section-title">&#x2728;&nbsp;Effects</div>
+        <div class="research-text" style="margin-bottom:.9rem">${esc(r.effects || '&mdash;')}</div>
+      </div>
+      <div class="research-block">
+        <div class="research-block-label">Therapeutic</div>
+        <div class="pill-list">${therapeuticPills || '<span style="color:var(--faint);font-size:.8rem">&mdash;</span>'}</div>
+      </div>
+      <div class="research-block" style="margin-top:.85rem">
+        <div class="research-block-label">Side Effects &amp; Cautions</div>
+        <div class="pill-list">${negativePills || '<span style="color:var(--faint);font-size:.8rem">&mdash;</span>'}</div>
+      </div>
+    </div>
+
+    <div class="research-panel" id="panel-moods">
+      <div class="section-title">&#x1F4CA;&nbsp;Mood Ratings</div>
+      <div class="mood-grid">${moodBars}</div>
+      <div class="research-meta">Generated ${genDate} &middot; Claude AI</div>
+    </div>
+
+    <div class="research-panel" id="panel-grow">
+      <div class="section-title">&#x1FAB4;&nbsp;Grow Notes</div>
+      <div class="research-text">${esc(r.grow_notes || '&mdash;')}</div>
+    </div>
+
+    <div class="research-panel" id="panel-rosin">
+      <div class="section-title">&#x1F36F;&nbsp;Rosin &amp; Extraction</div>
+      <div class="research-text">${esc(r.rosin_extraction || '&mdash;')}</div>
+    </div>
+
+    <div class="research-panel" id="panel-notes">
+      <div class="section-title">&#x1F4DD;&nbsp;My Notes</div>
+      <textarea class="notes-textarea" id="notes-main" placeholder="Personal grow notes, observations&hellip;">${esc(strain.notes || '')}</textarea>
+      <div class="notes-actions"><button class="btn btn-outline" onclick="saveNotes()">Save Notes</button></div>
+    </div>`;
+
   body.innerHTML = html;
   tabs.classList.remove('hidden');
   tabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
@@ -447,36 +496,48 @@ function switchTab(tabId, btn) {
   btn.classList.add('active');
 }
 
-// ── Generate research (direct Anthropic API) ──────────────
+// ── Generate research ─────────────────────────────────────────────────
 async function generateResearch() {
   if (!currentId) return;
   const apiKey = getApiKey();
-  if (!apiKey) {
-    toast('Add your Anthropic API key first &#9881;');
-    openSettings();
-    return;
-  }
+  if (!apiKey) { toast('Add your Anthropic API key first &#9881;'); openSettings(); return; }
   const strain = allStrains.find(s => s.id === currentId);
+
   setModalBody(`<div class="loading-panel"><div class="spinner"></div>
     <div class="loading-text">Claude is researching ${esc(strain?.name || 'this strain')}&hellip;</div>
-    <div class="loading-sub">Pulling genetics, terpenes, grow notes &amp; extraction data</div></div>`);
+    <div class="loading-sub">Genetics &middot; Terpenes &middot; Moods &middot; Grow &middot; Rosin</div></div>`);
 
-  const prompt = `You are a cannabis genetics expert and master craft cultivator specializing in solventless extraction — ice water hash, rosin, and living resin. You have deep knowledge of seed breeders, plant genetics, terpene chemistry, and pressing technique.
+  const prompt = `You are a cannabis genetics expert and master craft cultivator specializing in solventless extraction — ice water hash, rosin, and living resin. You have deep knowledge of seed breeders, plant genetics, terpene chemistry, pressing technique, and mood/therapeutic effects.
 
 Generate a detailed research profile for the cannabis strain "${strain.name}" by ${strain.breeder}.
 
-Return ONLY valid JSON with exactly these six keys:
+Return ONLY valid JSON with exactly these keys:
 
 {
-  "genetics_lineage": "3-4 sentences: parent strains, full genetic lineage, breeder background and philosophy, phenotype notes, what makes this cultivar sought after",
-  "terpene_profile": "3-4 sentences: dominant and secondary terpenes expected from this cultivar, their aromas and synergistic interactions, how the terpene expression develops through flower and into cure",
-  "effects": "3-4 sentences: onset character, intensity level, balance of cerebral vs body, duration, mood profile, best use cases and time of day",
-  "flavor_aroma": "3-4 sentences: detailed flavor notes on inhale and exhale, aroma at different grow stages (late flower, harvest, fresh cure, long cure), palate profile and mouthfeel",
-  "grow_notes": "3-4 sentences: growth structure and stretch behavior, flowering time, yield potential, training method recommendations (topping, LST, ScrOG), environmental preferences (VPD, temp, humidity), and harvest window indicators",
-  "rosin_extraction": "3-4 sentences: suitability for ice water hash and rosin pressing, expected solventless yield percentage, recommended press temperatures in °F, optimal wash water temps for IWHE, and what the final live rosin or hash rosin should look and smell like"
+  "lineage": "Full genetic lineage with breeder background (e.g. 'OG Kush x Durban Poison — bred by Cookies Fam, San Francisco'). 1-2 sentences.",
+  "misc": "Breeder info, typical THC range, bud appearance, best use timing, notable recognition. 2-3 sentences.",
+  "terpene_profile": "Dominant and secondary terpenes, their aromas, synergistic interactions, how expression develops through flower and into cure. 2-3 sentences.",
+  "aroma": "Detailed sensory aroma description — vivid and specific. 1-2 sentences.",
+  "effects": "Onset character, intensity, cerebral vs body balance, duration, mood profile. 2-3 sentences.",
+  "therapeutic": "Medical/therapeutic uses, comma-separated (e.g. 'Chronic pain, insomnia, stress')",
+  "negative": "Side effects and cautions, comma-separated (e.g. 'Dry mouth, dry eyes, couch-lock at high doses')",
+  "grow_notes": "Growth structure, stretch, flowering time, yield, training recommendations (topping/LST/ScrOG), VPD/temp/humidity preferences, harvest window indicators. 3-4 sentences.",
+  "rosin_extraction": "Suitability for ice water hash and rosin pressing, expected solventless yield %, recommended press temps in °F, optimal wash water temps for IWHE, what the final live rosin or hash rosin should look and smell like. 3-4 sentences.",
+  "mood_ratings": {
+    "wind_down": 0,
+    "anxiety_relief": 0,
+    "lift_up": 0,
+    "get_creative": 0,
+    "get_social": 0,
+    "pain_body": 0,
+    "just_happy": 0,
+    "aphrodisiac": 0
+  }
 }
 
-Be technically precise and craft-focused. Include details a passionate home grower and solventless hash maker would value. Output only the JSON object, nothing else.`;
+For mood_ratings: score each 1-10 based on genetics and terpene profile. Spread scores across the full range — most strains score 3-6 for most moods. 8-10 means exceptional for that mood. A strain cannot score 8+ on more than 3 moods.
+
+Output only the JSON object, nothing else.`;
 
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -489,7 +550,7 @@ Be technically precise and craft-focused. Include details a passionate home grow
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 2000,
+        max_tokens: 2048,
         messages: [{ role: 'user', content: prompt }],
       }),
     });
@@ -499,10 +560,7 @@ Be technically precise and craft-focused. Include details a passionate home grow
     }
     const data = await resp.json();
     let content = data.content[0].text.trim();
-    if (content.startsWith('```')) {
-      const lines = content.split('\n');
-      content = lines.slice(1, -1).join('\n').trim();
-    }
+    if (content.startsWith('```')) { const lines = content.split('\n'); content = lines.slice(1,-1).join('\n').trim(); }
     const result = JSON.parse(content);
     result.generated_at = new Date().toISOString();
     researchCache[currentId] = result;
@@ -520,7 +578,7 @@ Be technically precise and craft-focused. Include details a passionate home grow
   }
 }
 
-// ── Status update ─────────────────────────────────────────
+// ── Status / notes / delete ───────────────────────────────────────────
 function updateStatus() {
   if (!currentId) return;
   const newStatus = document.getElementById('modal-status-select').value;
@@ -535,7 +593,6 @@ function updateStatus() {
   toast('Status updated');
 }
 
-// ── Save notes ────────────────────────────────────────────
 function saveNotes() {
   if (!currentId) return;
   const el = document.getElementById('notes-main') || document.getElementById('notes-standalone');
@@ -548,7 +605,6 @@ function saveNotes() {
   toast('Notes saved');
 }
 
-// ── Delete ────────────────────────────────────────────────
 function confirmDelete() {
   if (!currentId) return;
   const strain = allStrains.find(s => s.id === currentId);
@@ -562,42 +618,15 @@ function confirmDelete() {
   toast('Strain removed');
 }
 
-// ── Add strain ────────────────────────────────────────────
-function openAddModal()  { showOverlay('add-modal'); }
-function closeAddModal() { hideOverlay('add-modal'); document.getElementById('add-form').reset(); }
-
-function submitAddStrain(e) {
-  e.preventDefault();
-  const form = e.target;
-  const slug  = form.name.value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 24);
-  const newId = `${slug}-${Math.random().toString(36).slice(2,6)}`;
-  const newStrain = {
-    id:      newId,
-    name:    form.name.value.trim(),
-    breeder: form.breeder.value.trim(),
-    status:  form.status.value,
-    notes:   form.notes.value.trim(),
-    added:   new Date().toISOString().slice(0, 10),
-  };
-  allStrains.push(newStrain);
-  saveStrains();
-  renderGrid();
-  closeAddModal();
-  toast(`"${newStrain.name}" added`);
-}
-
-// ── Settings / API key ────────────────────────────────────
-function openSettings() {
-  document.getElementById('api-key-input').value = getApiKey();
-  showOverlay('settings-modal');
-}
+// ── Settings ──────────────────────────────────────────────────────────
+function openSettings()  { document.getElementById('api-key-input').value = getApiKey(); showOverlay('settings-modal'); }
 function closeSettings() { hideOverlay('settings-modal'); }
 
 function saveApiKey() {
   const key = document.getElementById('api-key-input').value.trim();
-  if (key) { localStorage.setItem(LS_APIKEY, key); toast('API key saved'); }
-  else     { localStorage.removeItem(LS_APIKEY); toast('API key cleared'); }
+  if (key) localStorage.setItem(LS_APIKEY, key); else localStorage.removeItem(LS_APIKEY);
   updateKeyIndicator();
+  toast(key ? 'API key saved' : 'API key cleared');
   closeSettings();
 }
 
@@ -611,34 +640,28 @@ function clearApiKey() {
 
 function updateKeyIndicator() {
   const btn = document.getElementById('key-indicator');
-  btn.title = getApiKey() ? 'API key set &#x2714;' : 'API key not set — click to add';
-  btn.style.color = getApiKey() ? 'var(--green-hi)' : 'var(--faint)';
-  btn.style.borderColor = getApiKey() ? 'var(--green)' : 'var(--border)';
+  const set = !!getApiKey();
+  btn.style.color       = set ? 'var(--green-hi)' : 'var(--faint)';
+  btn.style.borderColor = set ? 'var(--green)'    : 'var(--border)';
+  btn.title = set ? 'API key set' : 'API key not set — click to add';
 }
 
-// ── Modal helpers ─────────────────────────────────────────
-function showOverlay(id) {
-  document.getElementById(id).classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-}
+// ── Modal helpers ─────────────────────────────────────────────────────
+function showOverlay(id) { document.getElementById(id).classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
 function hideOverlay(id) {
   document.getElementById(id).classList.add('hidden');
-  const anyOpen = ['detail-modal','add-modal','settings-modal']
-    .some(mid => !document.getElementById(mid).classList.contains('hidden'));
+  const anyOpen = ['detail-modal','settings-modal'].some(mid => !document.getElementById(mid).classList.contains('hidden'));
   if (!anyOpen) document.body.style.overflow = '';
 }
 
-document.getElementById('detail-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetailModal(); });
-document.getElementById('add-modal').addEventListener('click',    e => { if (e.target === e.currentTarget) closeAddModal(); });
-document.getElementById('settings-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeSettings(); });
+document.getElementById('detail-modal').addEventListener('click',  e => { if (e.target===e.currentTarget) closeDetailModal(); });
+document.getElementById('settings-modal').addEventListener('click', e => { if (e.target===e.currentTarget) closeSettings(); });
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  if (!document.getElementById('detail-modal').classList.contains('hidden')) closeDetailModal();
-  else if (!document.getElementById('add-modal').classList.contains('hidden')) closeAddModal();
+  if (!document.getElementById('detail-modal').classList.contains('hidden'))  closeDetailModal();
   else if (!document.getElementById('settings-modal').classList.contains('hidden')) closeSettings();
 });
 
-// ── Toast ─────────────────────────────────────────────────
 let toastTimer = null;
 function toast(msg) {
   const el = document.getElementById('toast');
@@ -648,7 +671,6 @@ function toast(msg) {
   toastTimer = setTimeout(() => el.classList.add('hidden'), 2800);
 }
 
-// ── Escape HTML ───────────────────────────────────────────
 function esc(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
