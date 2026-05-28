@@ -310,12 +310,12 @@ function loadStrainImg(el, id) {
   el.onerror = () => {
     if (!el.dataset.triedPng) {
       el.dataset.triedPng = '1';
-      el.src = `images/strains/${id}.png`;
+      el.src = `images/strains/${id}.png?v=3`;
     } else {
       el.style.display = 'none';
     }
   };
-  el.src = `images/strains/${id}.jpg`;
+  el.src = `images/strains/${id}.jpg?v=3`;
 }
 
 function renderGrid() {
