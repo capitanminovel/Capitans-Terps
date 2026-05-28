@@ -22,14 +22,12 @@
     html { scroll-behavior: smooth; }
     body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; min-height:100vh; }
 
-    /* Header */
     header { background:linear-gradient(180deg,#09070400 0%,var(--surface) 100%),linear-gradient(135deg,#0c0905 0%,#1a1410 100%); border-bottom:1px solid var(--border); padding:1.4rem 2rem; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
     .brand { display:flex; flex-direction:column; gap:2px; }
     .brand-name { font-family:'Playfair Display',serif; font-size:1.55rem; color:var(--gold-hi); letter-spacing:.01em; line-height:1.1; }
     .brand-tagline { font-size:.68rem; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; }
     .header-actions { display:flex; gap:.65rem; align-items:center; }
 
-    /* Buttons */
     .btn { padding:.45rem 1rem; border-radius:6px; border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:.82rem; font-weight:500; transition:all .15s ease; line-height:1.4; }
     .btn-outline { background:transparent; border:1px solid var(--border-hi); color:var(--muted); }
     .btn-outline:hover { border-color:var(--gold-dim); color:var(--gold); }
@@ -41,7 +39,6 @@
     .btn-generate:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(200,164,76,.3); }
     .btn-generate:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
 
-    /* Filter bar */
     .filter-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:.6rem 2rem; display:flex; gap:.45rem; align-items:center; overflow-x:auto; }
     .filter-label { font-size:.65rem; text-transform:uppercase; letter-spacing:.12em; color:var(--faint); margin-right:.2rem; white-space:nowrap; flex-shrink:0; }
     .filter-btn { padding:.3rem .85rem; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; font-size:.76rem; font-weight:500; font-family:'Inter',sans-serif; transition:all .15s ease; white-space:nowrap; flex-shrink:0; }
@@ -53,13 +50,13 @@
     .filter-btn[data-filter="Vault"].active     { background:var(--vault-bg);   border-color:var(--vault-fg);   color:var(--vault-fg); }
     .strain-count-badge { margin-left:auto; flex-shrink:0; font-size:.65rem; color:var(--faint); font-family:'JetBrains Mono',monospace; letter-spacing:.04em; }
 
-    /* Grid */
     main { padding:1.75rem 2rem 3rem; max-width:1400px; margin:0 auto; }
     .strain-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:1rem; }
 
-    /* Card */
-    .strain-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1.2rem 1.1rem; cursor:pointer; transition:all .18s ease; display:flex; flex-direction:column; gap:.55rem; }
+    .strain-card { background:var(--card); border:1px solid var(--border); border-radius:10px; cursor:pointer; transition:all .18s ease; display:flex; flex-direction:column; overflow:hidden; }
     .strain-card:hover { background:var(--card-hover); border-color:var(--border-hi); transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,.5); }
+    .card-img { width:100%; aspect-ratio:4/3; object-fit:cover; display:none; }
+    .card-body { padding:1.2rem 1.1rem; display:flex; flex-direction:column; gap:.55rem; flex:1; }
     .card-top { display:flex; justify-content:space-between; align-items:flex-start; gap:.5rem; }
     .card-name { font-family:'Playfair Display',serif; font-size:1rem; color:var(--text); line-height:1.3; }
     .card-breeder { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-top:2px; }
@@ -69,11 +66,12 @@
     .status-tag.Active   { background:var(--active-bg);  color:var(--active-fg); }
     .status-tag.Vault    { background:var(--vault-bg);   color:var(--vault-fg); }
     .card-notes { font-size:.74rem; color:var(--muted); font-style:italic; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; border-top:1px solid var(--border); padding-top:.5rem; }
-    .card-footer { display:flex; justify-content:space-between; align-items:center; }
+    .card-footer { display:flex; justify-content:space-between; align-items:center; margin-top:auto; }
     .card-date { font-size:.65rem; color:var(--faint); font-family:'JetBrains Mono',monospace; }
     .card-researched { font-size:.62rem; color:var(--green-hi); display:flex; align-items:center; gap:3px; letter-spacing:.04em; }
 
-    /* Modal */
+    .modal-hero-img { width:100%; max-height:260px; object-fit:cover; display:none; }
+
     .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.78); backdrop-filter:blur(5px); z-index:200; display:flex; align-items:center; justify-content:center; padding:1rem; }
     .modal-overlay.hidden { display:none; }
     .modal-box { background:var(--surface); border:1px solid var(--border-hi); border-radius:14px; width:100%; max-width:780px; max-height:90vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,.65); }
@@ -88,33 +86,27 @@
     select { background:var(--card); color:var(--text); border:1px solid var(--border-hi); border-radius:6px; padding:.3rem .7rem; font-size:.78rem; font-family:'Inter',sans-serif; cursor:pointer; }
     select:focus { outline:1px solid var(--gold-dim); }
 
-    /* Research tabs */
     .research-tabs { display:flex; border-bottom:1px solid var(--border); overflow-x:auto; flex-shrink:0; background:var(--surface); padding:0 1rem; scrollbar-width:none; }
     .research-tabs::-webkit-scrollbar { display:none; }
     .tab-btn { padding:.7rem .9rem; font-size:.76rem; font-weight:500; color:var(--muted); cursor:pointer; border:none; background:transparent; border-bottom:2px solid transparent; white-space:nowrap; transition:all .15s; font-family:'Inter',sans-serif; letter-spacing:.02em; flex-shrink:0; }
     .tab-btn:hover { color:var(--text); }
     .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
 
-    /* Modal body + panels */
     .modal-body { overflow-y:auto; flex:1; min-height:0; }
     .research-panel { padding:1.5rem 1.6rem; display:none; }
     .research-panel.active { display:block; }
     .section-title { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--gold-hi); margin-bottom:.75rem; display:flex; align-items:center; gap:.45rem; }
     .research-text { color:var(--text); line-height:1.8; font-size:.88rem; }
     .research-meta { margin-top:1.2rem; padding-top:.75rem; border-top:1px solid var(--border); font-size:.66rem; color:var(--faint); font-family:'JetBrains Mono',monospace; }
-
-    /* Two-field layout (lineage / misc side by side blocks) */
     .research-block { margin-bottom:1.25rem; }
     .research-block:last-child { margin-bottom:0; }
     .research-block-label { font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:.3rem; font-weight:500; }
 
-    /* Pill lists (therapeutic / negative) */
     .pill-list { display:flex; flex-wrap:wrap; gap:.35rem; }
     .pill { padding:.2rem .6rem; border-radius:10px; font-size:.72rem; font-weight:500; }
     .pill-green { background:var(--active-bg); color:var(--active-fg); }
     .pill-red   { background:#2c1010; color:#d06060; }
 
-    /* Mood bars */
     .mood-grid { display:flex; flex-direction:column; gap:.7rem; }
     .mood-row { display:flex; align-items:center; gap:.75rem; }
     .mood-label { font-size:.75rem; color:var(--muted); width:110px; flex-shrink:0; white-space:nowrap; }
@@ -122,7 +114,6 @@
     .mood-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--gold-dim),var(--gold)); transition:width .4s ease; }
     .mood-score { font-size:.72rem; color:var(--faint); width:22px; text-align:right; font-family:'JetBrains Mono',monospace; flex-shrink:0; }
 
-    /* Generate / loading panels */
     .generate-panel { padding:3rem 1.6rem; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.1rem; }
     .generate-glyph { font-size:2.4rem; opacity:.45; }
     .generate-title { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--muted); }
@@ -133,13 +124,11 @@
     .loading-text { color:var(--muted); font-size:.88rem; }
     .loading-sub  { color:var(--faint); font-size:.76rem; }
 
-    /* Notes */
     .notes-textarea { width:100%; background:var(--card); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:.86rem; font-family:'Inter',sans-serif; padding:.75rem .9rem; resize:vertical; min-height:120px; line-height:1.65; }
     .notes-textarea:focus { outline:1px solid var(--gold-dim); border-color:var(--gold-dim); }
     .notes-textarea::placeholder { color:var(--faint); }
     .notes-actions { display:flex; justify-content:flex-end; gap:.5rem; margin-top:.7rem; }
 
-    /* Settings modal */
     .settings-modal-box { max-width:460px; }
     .modal-form-body { padding:1.4rem 1.6rem; display:flex; flex-direction:column; gap:1rem; }
     .form-group { display:flex; flex-direction:column; gap:.3rem; }
@@ -150,7 +139,6 @@
     .modal-form-footer { padding:.9rem 1.6rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:.6rem; }
     .key-hint { font-size:.74rem; color:var(--faint); line-height:1.5; }
 
-    /* Empty / footer / toast */
     .empty-state { grid-column:1/-1; text-align:center; padding:4rem 2rem; }
     .empty-glyph { font-size:2.2rem; opacity:.35; margin-bottom:.75rem; }
     .empty-text  { font-size:.85rem; color:var(--faint); }
@@ -219,6 +207,7 @@
         <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
       </div>
     </div>
+    <img id="modal-strain-img" class="modal-hero-img" alt="">
     <div class="research-tabs hidden" id="research-tabs">
       <button class="tab-btn active" data-tab="genetics" onclick="switchTab('genetics',this)">&#x1F9EC; Genetics</button>
       <button class="tab-btn" data-tab="terpenes"        onclick="switchTab('terpenes',this)">&#x1F33F; Terpenes</button>
@@ -315,7 +304,20 @@ function init() {
   renderGrid();
 }
 
-// ── Grid ─────────────────────────────────────────────────────────────
+function loadStrainImg(el, id) {
+  el.style.display = 'none';
+  el.onload  = () => { el.style.display = 'block'; };
+  el.onerror = () => {
+    if (!el.dataset.triedPng) {
+      el.dataset.triedPng = '1';
+      el.src = `images/strains/${id}.png`;
+    } else {
+      el.style.display = 'none';
+    }
+  };
+  el.src = `images/strains/${id}.jpg`;
+}
+
 function renderGrid() {
   const grid = document.getElementById('strain-grid');
   const ce   = document.getElementById('strain-count');
@@ -330,17 +332,21 @@ function renderGrid() {
     const res = researchCache[s.id];
     const topMood = res?.mood_ratings ? getTopMood(res.mood_ratings) : null;
     return `<div class="strain-card" onclick="openDetail('${s.id}')">
-      <div class="card-top">
-        <div><div class="card-name">${esc(s.name)}</div><div class="card-breeder">${esc(s.breeder)}</div></div>
-        <span class="status-tag ${sc}">${esc(s.status)}</span>
-      </div>
-      ${s.notes ? `<div class="card-notes">${esc(s.notes)}</div>` : ''}
-      <div class="card-footer">
-        <span class="card-date">${s.added}</span>
-        ${topMood ? `<span class="card-researched">&#x2726; ${esc(topMood)}</span>` : ''}
+      <img class="card-img" data-id="${s.id}" alt="${esc(s.name)}">
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">${esc(s.name)}</div><div class="card-breeder">${esc(s.breeder)}</div></div>
+          <span class="status-tag ${sc}">${esc(s.status)}</span>
+        </div>
+        ${s.notes ? `<div class="card-notes">${esc(s.notes)}</div>` : ''}
+        <div class="card-footer">
+          <span class="card-date">${s.added}</span>
+          ${topMood ? `<span class="card-researched">&#x2726; ${esc(topMood)}</span>` : ''}
+        </div>
       </div>
     </div>`;
   }).join('');
+  grid.querySelectorAll('.card-img[data-id]').forEach(img => loadStrainImg(img, img.dataset.id));
 }
 
 function getTopMood(ratings) {
@@ -357,7 +363,6 @@ function setFilter(f, btn) {
   renderGrid();
 }
 
-// ── Detail modal ─────────────────────────────────────────────────────
 function openDetail(id) {
   currentId = id;
   const strain = allStrains.find(s => s.id === id);
@@ -368,6 +373,10 @@ function openDetail(id) {
   tag.textContent = strain.status;
   tag.className   = `status-tag ${strain.status.replace(' ', '-')}`;
   document.getElementById('modal-status-select').value = strain.status;
+  const heroImg = document.getElementById('modal-strain-img');
+  heroImg.alt = strain.name;
+  delete heroImg.dataset.triedPng;
+  loadStrainImg(heroImg, id);
   showOverlay('detail-modal');
   if (researchCache[id]) { renderResearch(researchCache[id], strain); return; }
   showGeneratePanel(strain);
@@ -376,6 +385,9 @@ function openDetail(id) {
 function closeDetailModal() {
   hideOverlay('detail-modal');
   document.getElementById('research-tabs').classList.add('hidden');
+  const heroImg = document.getElementById('modal-strain-img');
+  heroImg.style.display = 'none';
+  heroImg.src = '';
   currentId = null;
 }
 
@@ -389,7 +401,7 @@ function showGeneratePanel(strain) {
     <div class="generate-panel">
       <div class="generate-glyph">&#x1F52C;</div>
       <div class="generate-title">No research yet</div>
-      <div class="generate-desc">Generate a full profile for <strong style="color:var(--text)">${esc(strain.name)}</strong> — genetics, terpenes, effects, mood ratings, grow notes, and rosin extraction.</div>
+      <div class="generate-desc">Generate a full profile for <strong style="color:var(--text)">${esc(strain.name)}</strong> &mdash; genetics, terpenes, effects, mood ratings, grow notes, and rosin extraction.</div>
       <button class="btn-generate" onclick="generateResearch()">&#x2726;&nbsp;Generate Research</button>
     </div>
     <div style="padding:0 1.6rem 1.5rem;border-top:1px solid var(--border);padding-top:1.25rem">
@@ -406,7 +418,6 @@ function renderResearch(r, strain) {
   const body    = document.getElementById('modal-body');
   const genDate = r.generated_at ? new Date(r.generated_at).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}) : '&mdash;';
   const mr = r.mood_ratings || {};
-
   const moodBars = MOODS.map(m => {
     const score = mr[m.key] || 0;
     const pct   = (score / 10) * 100;
@@ -416,73 +427,36 @@ function renderResearch(r, strain) {
       <span class="mood-score">${score}</span>
     </div>`;
   }).join('');
-
   const therapeuticPills = (r.therapeutic || '').split(',').map(t => t.trim()).filter(Boolean)
     .map(t => `<span class="pill pill-green">${esc(t)}</span>`).join('');
   const negativePills = (r.negative || '').split(',').map(t => t.trim()).filter(Boolean)
     .map(t => `<span class="pill pill-red">${esc(t)}</span>`).join('');
-
-  let html = `
+  body.innerHTML = `
     <div class="research-panel active" id="panel-genetics">
-      <div class="research-block">
-        <div class="section-title">&#x1F9EC;&nbsp;Genetics &amp; Lineage</div>
-        <div class="research-text">${esc(r.lineage || '&mdash;')}</div>
-      </div>
-      <div class="research-block" style="margin-top:1.1rem">
-        <div class="research-block-label">Breeder Notes</div>
-        <div class="research-text">${esc(r.misc || '&mdash;')}</div>
-      </div>
+      <div class="research-block"><div class="section-title">&#x1F9EC;&nbsp;Genetics &amp; Lineage</div><div class="research-text">${esc(r.lineage || '&mdash;')}</div></div>
+      <div class="research-block" style="margin-top:1.1rem"><div class="research-block-label">Breeder Notes</div><div class="research-text">${esc(r.misc || '&mdash;')}</div></div>
     </div>
-
     <div class="research-panel" id="panel-terpenes">
-      <div class="research-block">
-        <div class="section-title">&#x1F33F;&nbsp;Terpene Profile</div>
-        <div class="research-text">${esc(r.terpene_profile || '&mdash;')}</div>
-      </div>
-      <div class="research-block" style="margin-top:1.1rem">
-        <div class="research-block-label">Aroma</div>
-        <div class="research-text">${esc(r.aroma || '&mdash;')}</div>
-      </div>
+      <div class="research-block"><div class="section-title">&#x1F33F;&nbsp;Terpene Profile</div><div class="research-text">${esc(r.terpene_profile || '&mdash;')}</div></div>
+      <div class="research-block" style="margin-top:1.1rem"><div class="research-block-label">Aroma</div><div class="research-text">${esc(r.aroma || '&mdash;')}</div></div>
     </div>
-
     <div class="research-panel" id="panel-effects">
-      <div class="research-block">
-        <div class="section-title">&#x2728;&nbsp;Effects</div>
-        <div class="research-text" style="margin-bottom:.9rem">${esc(r.effects || '&mdash;')}</div>
-      </div>
-      <div class="research-block">
-        <div class="research-block-label">Therapeutic</div>
-        <div class="pill-list">${therapeuticPills || '<span style="color:var(--faint);font-size:.8rem">&mdash;</span>'}</div>
-      </div>
-      <div class="research-block" style="margin-top:.85rem">
-        <div class="research-block-label">Side Effects &amp; Cautions</div>
-        <div class="pill-list">${negativePills || '<span style="color:var(--faint);font-size:.8rem">&mdash;</span>'}</div>
-      </div>
+      <div class="research-block"><div class="section-title">&#x2728;&nbsp;Effects</div><div class="research-text" style="margin-bottom:.9rem">${esc(r.effects || '&mdash;')}</div></div>
+      <div class="research-block"><div class="research-block-label">Therapeutic</div><div class="pill-list">${therapeuticPills || '<span style="color:var(--faint);font-size:.8rem">&mdash;</span>'}</div></div>
+      <div class="research-block" style="margin-top:.85rem"><div class="research-block-label">Side Effects &amp; Cautions</div><div class="pill-list">${negativePills || '<span style="color:var(--faint);font-size:.8rem">&mdash;</span>'}</div></div>
     </div>
-
     <div class="research-panel" id="panel-moods">
       <div class="section-title">&#x1F4CA;&nbsp;Mood Ratings</div>
       <div class="mood-grid">${moodBars}</div>
       <div class="research-meta">Generated ${genDate} &middot; Claude AI</div>
     </div>
-
-    <div class="research-panel" id="panel-grow">
-      <div class="section-title">&#x1FAB4;&nbsp;Grow Notes</div>
-      <div class="research-text">${esc(r.grow_notes || '&mdash;')}</div>
-    </div>
-
-    <div class="research-panel" id="panel-rosin">
-      <div class="section-title">&#x1F36F;&nbsp;Rosin &amp; Extraction</div>
-      <div class="research-text">${esc(r.rosin_extraction || '&mdash;')}</div>
-    </div>
-
+    <div class="research-panel" id="panel-grow"><div class="section-title">&#x1FAB4;&nbsp;Grow Notes</div><div class="research-text">${esc(r.grow_notes || '&mdash;')}</div></div>
+    <div class="research-panel" id="panel-rosin"><div class="section-title">&#x1F36F;&nbsp;Rosin &amp; Extraction</div><div class="research-text">${esc(r.rosin_extraction || '&mdash;')}</div></div>
     <div class="research-panel" id="panel-notes">
       <div class="section-title">&#x1F4DD;&nbsp;My Notes</div>
       <textarea class="notes-textarea" id="notes-main" placeholder="Personal grow notes, observations&hellip;">${esc(strain.notes || '')}</textarea>
       <div class="notes-actions"><button class="btn btn-outline" onclick="saveNotes()">Save Notes</button></div>
     </div>`;
-
-  body.innerHTML = html;
   tabs.classList.remove('hidden');
   tabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
   tabs.querySelector('[data-tab="genetics"]').classList.add('active');
@@ -496,68 +470,37 @@ function switchTab(tabId, btn) {
   btn.classList.add('active');
 }
 
-// ── Generate research ─────────────────────────────────────────────────
 async function generateResearch() {
   if (!currentId) return;
   const apiKey = getApiKey();
   if (!apiKey) { toast('Add your Anthropic API key first &#9881;'); openSettings(); return; }
   const strain = allStrains.find(s => s.id === currentId);
-
   setModalBody(`<div class="loading-panel"><div class="spinner"></div>
     <div class="loading-text">Claude is researching ${esc(strain?.name || 'this strain')}&hellip;</div>
     <div class="loading-sub">Genetics &middot; Terpenes &middot; Moods &middot; Grow &middot; Rosin</div></div>`);
+  const prompt = `You are a cannabis genetics expert and master craft cultivator specializing in solventless extraction. Generate a detailed research profile for "${strain.name}" by ${strain.breeder}.
 
-  const prompt = `You are a cannabis genetics expert and master craft cultivator specializing in solventless extraction — ice water hash, rosin, and living resin. You have deep knowledge of seed breeders, plant genetics, terpene chemistry, pressing technique, and mood/therapeutic effects.
-
-Generate a detailed research profile for the cannabis strain "${strain.name}" by ${strain.breeder}.
-
-Return ONLY valid JSON with exactly these keys:
-
+Return ONLY valid JSON:
 {
-  "lineage": "Full genetic lineage with breeder background (e.g. 'OG Kush x Durban Poison — bred by Cookies Fam, San Francisco'). 1-2 sentences.",
-  "misc": "Breeder info, typical THC range, bud appearance, best use timing, notable recognition. 2-3 sentences.",
-  "terpene_profile": "Dominant and secondary terpenes, their aromas, synergistic interactions, how expression develops through flower and into cure. 2-3 sentences.",
-  "aroma": "Detailed sensory aroma description — vivid and specific. 1-2 sentences.",
-  "effects": "Onset character, intensity, cerebral vs body balance, duration, mood profile. 2-3 sentences.",
-  "therapeutic": "Medical/therapeutic uses, comma-separated (e.g. 'Chronic pain, insomnia, stress')",
-  "negative": "Side effects and cautions, comma-separated (e.g. 'Dry mouth, dry eyes, couch-lock at high doses')",
-  "grow_notes": "Growth structure, stretch, flowering time, yield, training recommendations (topping/LST/ScrOG), VPD/temp/humidity preferences, harvest window indicators. 3-4 sentences.",
-  "rosin_extraction": "Suitability for ice water hash and rosin pressing, expected solventless yield %, recommended press temps in °F, optimal wash water temps for IWHE, what the final live rosin or hash rosin should look and smell like. 3-4 sentences.",
-  "mood_ratings": {
-    "wind_down": 0,
-    "anxiety_relief": 0,
-    "lift_up": 0,
-    "get_creative": 0,
-    "get_social": 0,
-    "pain_body": 0,
-    "just_happy": 0,
-    "aphrodisiac": 0
-  }
+  "lineage": "Full genetic lineage with breeder background. 1-2 sentences.",
+  "misc": "Breeder info, THC range, bud appearance, best use timing. 2-3 sentences.",
+  "terpene_profile": "Dominant and secondary terpenes, aromas, synergistic interactions. 2-3 sentences.",
+  "aroma": "Vivid and specific aroma description. 1-2 sentences.",
+  "effects": "Onset, intensity, cerebral vs body, duration, mood profile. 2-3 sentences.",
+  "therapeutic": "Medical uses, comma-separated",
+  "negative": "Side effects and cautions, comma-separated",
+  "grow_notes": "Structure, stretch, flowering time, yield, training, VPD/temp/humidity, harvest indicators. 3-4 sentences.",
+  "rosin_extraction": "IWHE and rosin suitability, yield %, press temps in F, wash water temps, final product description. 3-4 sentences.",
+  "mood_ratings": { "wind_down":0, "anxiety_relief":0, "lift_up":0, "get_creative":0, "get_social":0, "pain_body":0, "just_happy":0, "aphrodisiac":0 }
 }
-
-For mood_ratings: score each 1-10 based on genetics and terpene profile. Spread scores across the full range — most strains score 3-6 for most moods. 8-10 means exceptional for that mood. A strain cannot score 8+ on more than 3 moods.
-
-Output only the JSON object, nothing else.`;
-
+Score mood_ratings 1-10. Most scores 3-6. Max 3 moods can score 8+. Output only JSON.`;
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 2048,
-        messages: [{ role: 'user', content: prompt }],
-      }),
+      headers: { 'x-api-key':apiKey, 'anthropic-version':'2023-06-01', 'anthropic-dangerous-direct-browser-access':'true', 'content-type':'application/json' },
+      body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:2048, messages:[{ role:'user', content:prompt }] }),
     });
-    if (!resp.ok) {
-      const err = await resp.json().catch(() => ({}));
-      throw new Error(err.error?.message || `HTTP ${resp.status}`);
-    }
+    if (!resp.ok) { const err = await resp.json().catch(()=>({})); throw new Error(err.error?.message || `HTTP ${resp.status}`); }
     const data = await resp.json();
     let content = data.content[0].text.trim();
     if (content.startsWith('```')) { const lines = content.split('\n'); content = lines.slice(1,-1).join('\n').trim(); }
@@ -569,16 +512,10 @@ Output only the JSON object, nothing else.`;
     renderGrid();
     toast('Research generated &#x2726;');
   } catch (e) {
-    setModalBody(`<div class="generate-panel">
-      <div class="generate-glyph">&#9888;</div>
-      <div class="generate-title">Research failed</div>
-      <div class="generate-desc">${esc(e.message)}</div>
-      <button class="btn-generate" onclick="generateResearch()">Try Again</button>
-    </div>`);
+    setModalBody(`<div class="generate-panel"><div class="generate-glyph">&#9888;</div><div class="generate-title">Research failed</div><div class="generate-desc">${esc(e.message)}</div><button class="btn-generate" onclick="generateResearch()">Try Again</button></div>`);
   }
 }
 
-// ── Status / notes / delete ───────────────────────────────────────────
 function updateStatus() {
   if (!currentId) return;
   const newStatus = document.getElementById('modal-status-select').value;
@@ -618,7 +555,6 @@ function confirmDelete() {
   toast('Strain removed');
 }
 
-// ── Settings ──────────────────────────────────────────────────────────
 function openSettings()  { document.getElementById('api-key-input').value = getApiKey(); showOverlay('settings-modal'); }
 function closeSettings() { hideOverlay('settings-modal'); }
 
@@ -646,7 +582,6 @@ function updateKeyIndicator() {
   btn.title = set ? 'API key set' : 'API key not set — click to add';
 }
 
-// ── Modal helpers ─────────────────────────────────────────────────────
 function showOverlay(id) { document.getElementById(id).classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
 function hideOverlay(id) {
   document.getElementById(id).classList.add('hidden');
