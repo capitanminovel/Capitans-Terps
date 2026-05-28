@@ -295,11 +295,122 @@ function loadResearch() { try { return JSON.parse(localStorage.getItem(LS_RESEAR
 function saveResearch() { localStorage.setItem(LS_RESEARCH, JSON.stringify(researchCache)); }
 function getApiKey()    { return localStorage.getItem(LS_APIKEY) || ''; }
 
+const DEFAULT_RESEARCH = {
+  "ocifer": {
+    "lineage": "Ocifer is a Brothers Grimm Seeds (MrSoul) creation rooted in their iconic Cinderella 99 foundation, likely crossed with complementary sativa-leaning genetics to enhance vigor and terpene expression. Brothers Grimm, the legendary 1990s Amsterdam-era breeding house, is celebrated for producing clear-headed, cerebral cultivars with old-school energy and modern potency.",
+    "misc": "THC typically runs 22–26%, producing tight, resinous calyxes with light sage-green coloration and amber pistils. Best suited for daytime and early evening use. Brothers Grimm releases command a devoted following among connoisseurs seeking sativa energy with contemporary potency.",
+    "terpene_profile": "Terpinolene dominates with a fresh, floral-herbaceous character, complemented by myrcene providing an earthy base and pinene adding bright forest-pine notes. Together they produce a lively aromatic profile that intensifies through late flower and early cure.",
+    "aroma": "Sharp pine and fresh citrus on the nose with a soft floral sweetness — reminiscent of a mountain meadow after rain.",
+    "effects": "Onset is rapid and cerebral, arriving within minutes as a clear-headed, energizing rush of focus and creative thought. Leans decidedly sativa — uplifting and sociable with minimal body sedation. Duration runs 2–3 hours before tapering gently.",
+    "therapeutic": "Depression, fatigue, ADHD, creative blocks, social anxiety",
+    "negative": "Dry mouth, dry eyes, occasional paranoia at high doses",
+    "grow_notes": "Ocifer stretches considerably in early flower — expect 75–100% height increase over the first 3 weeks of 12/12. Flowering time is 60–65 days with an open, airy structure that benefits from aggressive topping or ScrOG to maximize light penetration. Prefers 68–78°F with VPD around 1.0–1.2 kPa in late flower. Trichomes turn milky with sparse amber at peak harvest.",
+    "rosin_extraction": "The terpinolene-dominant profile makes Ocifer a standout for fresh-frozen live rosin — terpene expression is exceptional when processed immediately after harvest. Expect IWHE yields of 12–18% on quality material. Press at 170–180°F for a clear, golden-amber product. Wash water at 34–36°F with two 15-minute agitation cycles produces the cleanest material.",
+    "mood_ratings": {"wind_down":3,"anxiety_relief":5,"lift_up":9,"get_creative":8,"get_social":7,"pain_body":3,"just_happy":7,"aphrodisiac":4},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "pasture-bedtime": {
+    "lineage": "Pasture Bedtime is a Solfire Gardens creation by Tad Hudson, built on a foundation of potent indica genetics — likely a cross of their in-house OG or Afghani fire cuts with exotic fruity strains. Solfire Gardens is celebrated for pursuing heavily resinous, terpene-forward cultivars engineered for powerful sedating effects and solventless extraction performance.",
+    "misc": "THC typically lands in the 24–28% range with substantial trichome coverage and dense, calyx-heavy flower that presents deep green with purple hues under cooler temps. Best reserved for late evening use due to its profoundly sedating nature. Highly sought after among hash makers and extract artists for exceptional melt quality.",
+    "terpene_profile": "Myrcene leads heavily, responsible for the deep body-lock effect, followed by caryophyllene (spicy, peppery) and linalool (floral, lavender). This trio works synergistically to produce profound physical relaxation and mild analgesic properties. Terpene expression peaks 2–3 weeks into cure.",
+    "aroma": "Rich, dank earth with a sweet floral lavender undercurrent and a hint of ripe tropical fruit — deeply calming and complex on the nose.",
+    "effects": "Effects arrive slowly — a gentle cerebral warmth within 10–15 minutes that quickly descends into heavy full-body relaxation. Profoundly sedating, often leading to sleep within 1–2 hours. Best suited for managing insomnia, chronic pain, or deep anxiety relief at end of day.",
+    "therapeutic": "Insomnia, chronic pain, anxiety, muscle spasms, PTSD",
+    "negative": "Heavy couch-lock, dry mouth, dry eyes, morning grogginess at high doses",
+    "grow_notes": "Compact indica structure with moderate stretch (40–60%) in early flower. Flowering runs 63–70 days with tight internode spacing — LST and lollipopping are recommended to improve airflow and reduce humidity-related issues in the dense canopy. Thrives at 65–75°F with 45–55% RH in late flower. Purple coloration develops reliably when nighttime temps drop below 62°F in week 7+.",
+    "rosin_extraction": "Pasture Bedtime is exceptional for solventless extraction — dense trichome coverage and high myrcene content make it one of Solfire's top rosin performers. IWHE yields run 18–25% on fresh-frozen material. Press at 160–170°F with low pressure for a creamy, light-amber live rosin. Use ice-cold wash water (33–35°F) and limit agitation to 3–5 minutes per cycle for 6-star-quality heads.",
+    "mood_ratings": {"wind_down":10,"anxiety_relief":8,"lift_up":2,"get_creative":2,"get_social":2,"pain_body":9,"just_happy":5,"aphrodisiac":3},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "mind-flayer-s1": {
+    "lineage": "Mind Flayer S1 is a self-pollinated (S1) feminized version of Solfire Gardens' original Mind Flayer — a heavily indica-dominant hybrid with roots in powerful OG Kush and exotic fruit genetics. S1 breeding preserves the elite phenotype's genetic expression while producing all-female seeds accessible to home cultivators without running males.",
+    "misc": "Expect THC in the 26–30% range with extraordinary resin production. Buds are compact and extremely frosty with deep green and occasional purple coloration. Mind Flayer has become a Solfire flagship and is highly revered in the solventless extract community for its exceptional melt quality and robust terpene retention through cure.",
+    "terpene_profile": "Caryophyllene dominates with a sharp, spicy backbone complemented by myrcene and limonene. This creates a complex profile that is simultaneously dank, peppery, and subtly citrusy — an aggressive and unmistakable expression. Terpene intensity maintains well for 3–6 months post-harvest with proper cure.",
+    "aroma": "Fuel and black pepper on first encounter, followed by dark fruit and damp earth — pungent, complex, and unmistakably dank.",
+    "effects": "Mind Flayer hits hard and fast — a crushing indica experience with immediate body heaviness and warm euphoric mental haze. Cerebral activity slows considerably while physical tension dissolves completely. Long-lasting, often 3–4 hours of sustained deep effect.",
+    "therapeutic": "Severe pain, insomnia, PTSD, appetite stimulation, nausea",
+    "negative": "Couch-lock, dry mouth, dry eyes, strong sedation — not recommended for first-time users",
+    "grow_notes": "Moderate stretch with a bushy, wide-spreading structure. Flowering time is 65–70 days. Heavy lateral branching responds extremely well to topping and ScrOG — multiple tops create an even canopy with many large cola sites. Keep humidity below 50% in late flower to protect dense buds. VPD 1.3–1.7 kPa in weeks 6–8. Flush 10–14 days before harvest for optimal terpene expression.",
+    "rosin_extraction": "One of the most revered strains in the solventless community. IWHE yields on fresh-frozen flower average 20–28%, with full-melt 6-star heads achievable under optimal conditions. Press at 160–165°F for a dark, terpy live rosin with exceptional flavor. The high caryophyllene produces a uniquely spicy rosin that stands apart from typical fruity profiles.",
+    "mood_ratings": {"wind_down":9,"anxiety_relief":7,"lift_up":2,"get_creative":3,"get_social":2,"pain_body":10,"just_happy":5,"aphrodisiac":4},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "strawn-johnson": {
+    "lineage": "Strawn Johnson is a Solfire Gardens hybrid combining fire genetics from Tad Hudson's carefully curated library — likely a cross involving potent OG or Kush heritage with complementary exotic genetics selected for terpene complexity and resin density. Solfire consistently prioritizes maximum resin production and layered aromatic profiles across their catalog.",
+    "misc": "THC typically 24–28%, with dense, compact flowers coated in milky-white trichomes and a moderate calyx-to-leaf ratio. Best used as an evening strain due to its relaxing, stress-melting character. Solfire cultivars are highly regarded among Pacific Northwest extract artists for their consistent solventless performance.",
+    "terpene_profile": "Myrcene and caryophyllene lead with an earthy, spicy backbone, supported by humulene (herbal, hoppy) and ocimene (sweet, floral). The profile shifts from deeply herbal and earthy in early flower to sweeter and more complex deep into cure — multilayered and evolving.",
+    "aroma": "Damp forest floor with subtle sweetness — a rich herbal earthiness reminiscent of aged wood and fresh soil after rain with a faint spicy finish.",
+    "effects": "A balanced hybrid experience starting with a gentle cerebral lift and creative openness, transitioning into full-body relaxation within 30–45 minutes. Sociable and clear-headed in moderate doses, more sedating at higher quantities. Versatile daytime-to-evening strain lasting 2–3 hours.",
+    "therapeutic": "Stress, anxiety, mild pain, muscle tension, mood disorders",
+    "negative": "Dry mouth, dry eyes, mild paranoia at high doses",
+    "grow_notes": "Medium stretch with strong lateral branching. Flowering time is 63–68 days. Responds well to topping and light defoliation. Prefers consistent temperatures of 70–78°F with moderate humidity (50–55%) in early flower dropping to 40–50% in late flower. VPD 1.0–1.4 kPa. Harvest when 20–30% of trichomes show amber for optimal effect profile.",
+    "rosin_extraction": "Reliable solventless performer with consistent IWHE yields of 14–20% on fresh-frozen material. The myrcene-rich profile translates well into a smooth, earthy live rosin with good melt quality. Press at 170–180°F for a golden-amber product. Best processed within 72 hours of harvest to preserve maximum terpene expression.",
+    "mood_ratings": {"wind_down":7,"anxiety_relief":8,"lift_up":5,"get_creative":5,"get_social":6,"pain_body":6,"just_happy":7,"aphrodisiac":4},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "mandarin-cookies-v3": {
+    "lineage": "Mandarin Cookies V3 is Ethos Genetics' third-generation phenotype selection of their landmark Mandarin Cookies line — a cross of Mandarin Sunset (Orange Skunk x OGKB) x Forum Cut Girl Scout Cookies. V3 represents refined selection pressure for increased terpene production, improved structure, and enhanced rosin yield compared to earlier releases.",
+    "misc": "THC typically runs 26–30%, making this one of Ethos' most potent offerings. Buds are dense and medium-sized with exceptional trichome coverage extending into the sugar leaves. The citrus-cookie terpene profile is immediately recognizable at any stage. Widely regarded as one of the top solventless extraction cultivars available to home growers.",
+    "terpene_profile": "Limonene leads prominently with a burst of bright mandarin-orange citrus, followed by caryophyllene (spicy, woody) and myrcene (earthy). Secondary linalool and bisabolol add a smooth floral backdrop that softens the profile on exhale. Expression peaks at week 8 and maintains through extended cure.",
+    "aroma": "Mandarin orange zest with warm cookie dough and a whisper of spice — bright, sweet, and instantly recognizable.",
+    "effects": "Effects begin with a rush of uplifting euphoria and mental clarity, giving way to a warm, comfortable body buzz that promotes relaxation without heavy sedation. Versatile for daytime creative work or evening unwinding. Effects last 2–3 hours with a smooth, gentle descent.",
+    "therapeutic": "Depression, anxiety, chronic pain, fatigue, nausea",
+    "negative": "Dry mouth, dry eyes, occasional headache at very high doses",
+    "grow_notes": "Moderate stretch (60–80%) with a Christmas-tree structure that fills out beautifully under ScrOG. Flowering time is 63–68 days. Heavy feeder — responds to full nutrient programs with generous calcium and magnesium in mid-flower. Prefers 72–80°F with VPD 1.1–1.5 kPa in late flower. Harvest around day 63–65 for the best terpene-to-potency balance.",
+    "rosin_extraction": "Mandarin Cookies V3 is a benchmark rosin cultivar — extremely high trichome density and exceptional terpene-to-resin ratio produce outstanding solventless yields. Fresh-frozen IWHE averages 22–30%. Press at 165–175°F with medium-low pressure for bright, golden translucent live rosin with outstanding citrus aroma. Wash water at 33–35°F with two 8-minute agitation cycles produces top-shelf 6-star material.",
+    "mood_ratings": {"wind_down":5,"anxiety_relief":7,"lift_up":8,"get_creative":8,"get_social":7,"pain_body":5,"just_happy":9,"aphrodisiac":6},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "cotton-candy-cookies": {
+    "lineage": "Cotton Candy Cookies is an Ethos Genetics creation crossing a Grape-lineage cultivar (Grape Ape or Grape Stomper descent) with their flagship Mandarin Cookies (Mandarin Sunset x Forum GSC). The pairing combines the sweet grape-candy terpenes of the Grape parent with the citrus-cookie complexity of Mandarin Cookies to produce a distinctly dessert-forward hybrid.",
+    "misc": "THC runs 24–28% with excellent bag appeal — deep purple and green flowers under a thick blanket of crystal trichomes. The candy-grape aroma is exceptionally sweet and pungent. Popular among concentrate consumers for a dessert-like terpene profile that translates beautifully into live rosin with candy-like sweetness.",
+    "terpene_profile": "Myrcene and limonene co-dominate in a rich fruity-sweet profile, with caryophyllene adding spice and structural depth. Secondary geraniol and linalool contribute a floral, rose-like sweetness that makes this strain exceptionally aromatic. The profile intensifies significantly with 3–6 weeks of proper cure.",
+    "aroma": "Sweet grape candy and tangerine with a rich, doughy cookie finish — like a dessert counter in concentrated form.",
+    "effects": "A pleasant hybrid experience starting with mood-lifting, giggly euphoria followed by gentle body relaxation. Social, cheerful, and moderately sedating — perfect for creative sessions, social gatherings, or unwinding after work. Duration 2–2.5 hours.",
+    "therapeutic": "Depression, stress, mild anxiety, appetite stimulation",
+    "negative": "Dry mouth, dry eyes, mild couch-lock at higher doses",
+    "grow_notes": "Medium stretch with dense, heavily frosted flowers. Flowering time is 63–70 days. The Grape genetics contribute purple coloration when nighttime temperatures drop below 65°F in the final 2 weeks. Moderate feeder preferring slightly lower EC in late flower. VPD 1.0–1.4 kPa. ScrOG or multi-topping recommended to maximize the naturally bushy structure.",
+    "rosin_extraction": "Cotton Candy Cookies produces an exceptionally aromatic live rosin driven by its geraniol and linalool content. IWHE yields range 18–24% on fresh-frozen material. The resulting rosin is often pale amber or lightly pink in color with a sweet candy-like aroma that makes it a crowd favorite at any table. Press at 165–175°F. Avoid over-agitation during wash to preserve delicate terpene compounds.",
+    "mood_ratings": {"wind_down":6,"anxiety_relief":6,"lift_up":7,"get_creative":6,"get_social":8,"pain_body":4,"just_happy":9,"aphrodisiac":7},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "spicy-guava": {
+    "lineage": "Spicy Guava by Elev8 Seeds combines tropical guava-forward genetics — likely from Cookies Fam's Guava Gelato lineage or a similar fruity exotic — with a spice-forward cultivar to create a uniquely contrasting terpene profile. Elev8 Seeds specializes in terpene-expressive, resin-heavy hybrids that stand out in a crowded market through distinct flavor identities.",
+    "misc": "THC typically 22–26%, with medium-to-large dense flowers exhibiting excellent trichome coverage. The spicy-tropical terpene combination is distinctive and immediately identifiable. Best enjoyed mid-afternoon to evening. Elev8 strains are gaining recognition in the Pacific Northwest solventless community for consistent resin quality and unique aromatic expression.",
+    "terpene_profile": "Ocimene (sweet, tropical) and beta-caryophyllene (spicy, peppery) co-dominate in a striking aromatic contrast that gives this cultivar its name. Myrcene supports with grounding earthiness while nerolidol adds woody tropical depth. The spice-meets-tropical profile is unusual and highly sought after by terpene enthusiasts.",
+    "aroma": "Fresh guava and passion fruit with a sharp, peppery spice finish — tropical and exotic with an unexpected kick.",
+    "effects": "Uplifting and euphoric initially, with a tropical wave of cerebral brightness that transitions into relaxed sociability. Body effects are moderate — comfortable and tension-relieving without heavy sedation. Excellent daytime-to-evening hybrid lasting 2–3 hours.",
+    "therapeutic": "Stress, mild depression, fatigue, social anxiety, appetite",
+    "negative": "Dry mouth, dry eyes, slight restlessness at high doses",
+    "grow_notes": "Moderate stretch with an open structure that benefits from topping and LST. Flowering time is 60–65 days. The tropical genetics express best terpene profiles in slightly warmer environments — 74–80°F in late flower. VPD 1.0–1.3 kPa. Medium feeder with good phosphorus and potassium support in weeks 5–7. Trichomes develop a golden hue at full maturity.",
+    "rosin_extraction": "The ocimene-forward profile makes Spicy Guava particularly interesting for live rosin — fresh-frozen material retains the tropical terpene signature exceptionally well. IWHE yields average 14–20%. Press at 175–185°F for a golden translucent rosin with an intensely tropical aroma. The spicy caryophyllene adds a distinctive character to the finished product that sets it apart from conventional fruity rosins.",
+    "mood_ratings": {"wind_down":5,"anxiety_relief":6,"lift_up":8,"get_creative":7,"get_social":8,"pain_body":4,"just_happy":8,"aphrodisiac":6},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "blueberry-pie": {
+    "lineage": "Blueberry Pie by Elev8 Seeds crosses classic DJ Short Blueberry genetics (or a Blueberry descendant) with a Cookies-family pie cultivar — likely Animal Cookies or Cherry Pie. The pairing combines the iconic berry terpenes of the Blueberry lineage with the rich baked-dough complexity of the Cookies family for an authentically dessert-forward hybrid.",
+    "misc": "THC runs 22–26%, producing medium-to-large flowers with excellent density and beautiful blue-purple coloration under cool temps. The blueberry aroma is authentic and powerful even at distance. A comfort strain ideal for evening relaxation. Blueberry Pie has built a loyal following among berry-terpene enthusiasts who prize the authentic DJ Short lineage expression.",
+    "terpene_profile": "Myrcene dominates with a rich earthy-fruity base, followed by ocimene (sweet, berry) and linalool (floral, lavender). Secondary caryophyllene adds gentle spice that balances the sweetness. The profile is deeply aromatic and richly layered, developing significant complexity through 4–6 weeks of cure.",
+    "aroma": "Fresh blueberries and warm pie crust with a soft lavender sweetness — comforting, warm, and intensely fruity.",
+    "effects": "A deeply relaxing, comfort-inducing experience beginning with a gentle mood lift and wave of happiness, settling into full-body ease and warmth. Moderately sedating — excellent for evening use, creative reflection, or quiet social settings. Duration 2–3 hours.",
+    "therapeutic": "Stress, anxiety, insomnia, depression, chronic pain",
+    "negative": "Dry mouth, dry eyes, couch-lock tendency at higher doses",
+    "grow_notes": "Compact indica-dominant structure with minimal stretch. Flowering time is 60–65 days. Purple and blue coloration develops readily when temps drop below 65°F in the final 2 weeks — exceptional bag appeal. Low-to-moderate feeder; avoid excess nitrogen in flower to preserve terpene quality. VPD 1.0–1.3 kPa. Harvest at mostly cloudy trichomes with 10–20% amber for peak relaxation effect.",
+    "rosin_extraction": "Blueberry Pie is a reliable solventless cultivar with IWHE yields averaging 15–22% on fresh-frozen material. The myrcene-linalool-forward profile produces a smooth, sweet live rosin with a distinctive blueberry character that holds beautifully through pressing. Press at 165–175°F for a light-to-medium amber product. The linalool content gives the rosin a uniquely floral, smooth finish on the palate.",
+    "mood_ratings": {"wind_down":8,"anxiety_relief":7,"lift_up":4,"get_creative":4,"get_social":5,"pain_body":7,"just_happy":8,"aphrodisiac":5},
+    "generated_at": "2026-05-28T00:00:00.000Z"
+  }
+};
+
 function init() {
   const saved = loadStrains();
   allStrains    = saved || JSON.parse(JSON.stringify(DEFAULT_STRAINS));
   researchCache = loadResearch();
   if (!saved) saveStrains();
+  if (Object.keys(researchCache).length === 0) {
+    researchCache = JSON.parse(JSON.stringify(DEFAULT_RESEARCH));
+    saveResearch();
+  }
   updateKeyIndicator();
   renderGrid();
 }
