@@ -270,6 +270,7 @@ const DEFAULT_STRAINS = [
   { id:'mandarin-cookies-v3',  name:'Mandarin Cookies V3',  breeder:'Ethos Genetics',  status:'Vault',    notes:'',                               added:'2026-05-27' },
   { id:'cotton-candy-cookies', name:'Cotton Candy Cookies', breeder:'Ethos Genetics',  status:'Vault',    notes:'Cross: Grape x Mandarin Cookies', added:'2026-05-27' },
   { id:'spicy-guava',          name:'Spicy Guava',          breeder:'Elev8 Seeds',     status:'Vault',    notes:'',                               added:'2026-05-27' },
+  { id:'the-krux-16',          name:'The Krux #16',         breeder:'Ethos Genetics',  status:'Vault',    notes:'',                               added:'2026-05-31' },
   { id:'blueberry-pie',        name:'Blueberry Pie',        breeder:'Elev8 Seeds',     status:'Vault',    notes:'',                               added:'2026-05-27' },
 ];
 
@@ -399,16 +400,36 @@ const DEFAULT_RESEARCH = {
     "rosin_extraction": "Blueberry Pie is a reliable solventless cultivar with IWHE yields averaging 15–22% on fresh-frozen material. The myrcene-linalool-forward profile produces a smooth, sweet live rosin with a distinctive blueberry character that holds beautifully through pressing. Press at 165–175°F for a light-to-medium amber product. The linalool content gives the rosin a uniquely floral, smooth finish on the palate.",
     "mood_ratings": {"wind_down":8,"anxiety_relief":7,"lift_up":4,"get_creative":4,"get_social":5,"pain_body":7,"just_happy":8,"aphrodisiac":5},
     "generated_at": "2026-05-28T00:00:00.000Z"
+  },
+  "the-krux-16": {
+    "lineage": "The Krux #16 is an Ethos Genetics creation from their Krux line — a cross involving their prized RBx (Rare Bodhi) genetics combined with complementary Ethos in-house cuts. Ethos Genetics, led by Matthew Riot, is renowned for producing pheno-hunt-ready lines with exceptional resin density, unique terpene expressions, and highly consistent feminized genetics engineered for maximum solventless performance.",
+    "misc": "THC typically runs 24–28% with dense, heavily frosted flowers and outstanding bag appeal. The Krux #16 phenotype was selected for its superior terpene expression and resin production compared to other phenos in the Krux run. Highly regarded among Ethos enthusiasts and rosin extractors for its unique aromatic profile and consistent solventless yields.",
+    "terpene_profile": "Caryophyllene and myrcene co-lead with a rich, spicy-earthy backbone. Limonene adds citrus brightness while linalool contributes a smooth floral undertone. The result is a complex, layered profile that deepens significantly with 4–6 weeks of cure — savory, spicy, and subtly sweet.",
+    "aroma": "Earthy spice with dark fruit and subtle citrus — pungent, complex, and deeply aromatic with a lingering sweetness on the exhale.",
+    "effects": "A potent, well-rounded hybrid experience beginning with a euphoric cerebral uplift that transitions into deep, comfortable body relaxation. Clear-headed and functional in moderate doses, more sedating at higher quantities. Lasting 2.5–3.5 hours with a smooth, even descent.",
+    "therapeutic": "Chronic pain, stress, anxiety, depression, appetite stimulation",
+    "negative": "Dry mouth, dry eyes, mild couch-lock at higher doses",
+    "grow_notes": "Moderate stretch (50–70%) with robust branching and excellent resin production from mid-flower. Flowering time is 63–70 days. Responds well to topping and ScrOG. The #16 pheno favors consistent temperatures of 70–78°F with VPD 1.1–1.5 kPa in late flower. Heavy trichome production extends into sugar leaves — trim conservatively to preserve resin-coated material for extraction.",
+    "rosin_extraction": "The Krux #16 is a standout solventless cultivar. Fresh-frozen IWHE yields average 18–25% with high terpene retention. Press at 165–175°F for a golden-to-amber live rosin with an intensely aromatic spicy-earthy character. Wash at 33–35°F with two 10-minute agitation cycles for the cleanest heads. Ethos genetics consistently produce rosin with excellent melt quality and long-lasting terpene expression.",
+    "mood_ratings": {"wind_down":7,"anxiety_relief":7,"lift_up":6,"get_creative":6,"get_social":6,"pain_body":8,"just_happy":8,"aphrodisiac":5},
+    "generated_at": "2026-05-31T00:00:00.000Z"
   }
 };
 
 function init() {
   const saved = loadStrains();
   allStrains    = saved || JSON.parse(JSON.stringify(DEFAULT_STRAINS));
+  if (saved) {
+    const savedIds = new Set(saved.map(s => s.id));
+    DEFAULT_STRAINS.forEach(s => { if (!savedIds.has(s.id)) allStrains.push(s); });
+    saveStrains();
+  }
   researchCache = loadResearch();
-  if (!saved) saveStrains();
   if (Object.keys(researchCache).length === 0) {
     researchCache = JSON.parse(JSON.stringify(DEFAULT_RESEARCH));
+    saveResearch();
+  } else {
+    Object.keys(DEFAULT_RESEARCH).forEach(id => { if (!researchCache[id]) researchCache[id] = DEFAULT_RESEARCH[id]; });
     saveResearch();
   }
   updateKeyIndicator();
