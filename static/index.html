@@ -59,6 +59,17 @@
       z-index: 100;
     }
 
+    .brand-group { display: flex; align-items: center; gap: 0.75rem; }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-hi);
+      flex-shrink: 0;
+    }
+
     .brand { display: flex; flex-direction: column; gap: 2px; }
 
     .brand-name {
@@ -618,6 +629,7 @@
     /* ── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 640px) {
       header { padding: 1rem; }
+      .brand-logo { width: 34px; height: 34px; }
       .brand-name { font-size: 1.25rem; }
       main { padding: 1rem 1rem 2.5rem; }
       .filter-bar { padding: 0.6rem 1rem; }
@@ -630,9 +642,12 @@
 <body>
 
 <header>
-  <div class="brand">
-    <div class="brand-name">Capitan's Terps Grows</div>
-    <div class="brand-tagline">Craft &middot; Solventless &middot; Living</div>
+  <div class="brand-group">
+    <img class="brand-logo" src="/images/logo.jpg" alt="Capitan's Terps logo">
+    <div class="brand">
+      <div class="brand-name">Capitan's Terps Grows</div>
+      <div class="brand-tagline">Craft &middot; Solventless &middot; Living</div>
+    </div>
   </div>
   <div class="header-actions">
     <button class="btn btn-primary" onclick="openAddModal()">+ Add Strain</button>
