@@ -1,4 +1,4 @@
-# Captain's Terps — Claude Code Context
+# Capitan's Terps — Claude Code Context
 
 ## Who's Working on This
 
@@ -31,10 +31,17 @@ capitans_terps/
 │   └── research.py      # Research note endpoints
 ├── static/              # Frontend HTML/CSS/JS
 ├── data/                # Static data files
-├── images/              # Strain images
+├── images/strains/      # Strain images — see naming convention below
 ├── requirements.txt
 └── CLAUDE.md            # This file
 ```
+
+## Strain Images
+Images live in `images/strains/`, named by strain ID (matches the `id` field in `data/strains.json`):
+- `{id}.jpg` — the main image, shown on the strain's card in the grid and first in the detail gallery.
+- `{id}-1.jpg`, `{id}-2.jpg`, `{id}-3.jpg`, ... — extra gallery images, only visible after clicking into a strain's detail view.
+
+No database entry is needed to add a picture — `main.py` scans the directory by filename at request time and attaches whatever it finds to that strain's `images` list.
 
 ## Running the App
 ```bash

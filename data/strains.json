@@ -67,10 +67,18 @@
     {
       "id": "blueberry-pie",
       "name": "Blueberry Pie",
-      "breeder": "Elev8 Seeds",
+      "breeder": "Raw Genetics",
       "status": "Vault",
       "notes": "",
       "added": "2026-05-27"
+    },
+    {
+      "id": "grape-nebula",
+      "name": "Grape Nebula",
+      "breeder": "Masonic Seed Co",
+      "status": "Vault",
+      "notes": "Cross: Dulce De Uva x Starburst F2",
+      "added": "2026-07-23"
     }
   ]
 }

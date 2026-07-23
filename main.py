@@ -9,7 +9,7 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-app = FastAPI(title="Captain's Terps Grows")
+app = FastAPI(title="Capitan's Terps Grows")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,6 +22,7 @@ BASE = Path(__file__).parent
 DATA_DIR = BASE / "data"
 STRAINS_FILE = DATA_DIR / "strains.json"
 RESEARCH_FILE = DATA_DIR / "research_cache.json"
+STRAIN_IMAGES_DIR = BASE / "images" / "strains"
 
 client = Anthropic()
 
@@ -36,6 +37,31 @@ def save_json(path: Path, data) -> None:
         json.dump(data, f, indent=2)
 
 
+def get_strain_image_urls(strain_id: str) -> list[str]:
+    """Find images for a strain: '{id}.ext' is the main image (shown on the
+    card), '{id}-1.ext', '{id}-2.ext', ... are gallery images (shown only in
+    the strain detail view). Returns URLs sorted with the main image first."""
+    if not STRAIN_IMAGES_DIR.exists():
+        return []
+    ranked = []
+    prefix = f"{strain_id}-"
+    for path in STRAIN_IMAGES_DIR.iterdir():
+        if not path.is_file():
+            continue
+        stem = path.stem
+        if stem == strain_id:
+            ranked.append((0, path.name))
+        elif stem.startswith(prefix) and stem[len(prefix):].isdigit():
+            ranked.append((int(stem[len(prefix):]), path.name))
+    ranked.sort(key=lambda r: r[0])
+    return [f"/images/strains/{name}" for _, name in ranked]
+
+
+def with_images(strain: dict) -> dict:
+    strain["images"] = get_strain_image_urls(strain["id"])
+    return strain
+
+
 @app.get("/")
 def root():
     return FileResponse(BASE / "static" / "index.html")
@@ -43,7 +69,9 @@ def root():
 
 @app.get("/api/strains")
 def get_strains():
-    return load_json(STRAINS_FILE)
+    data = load_json(STRAINS_FILE)
+    data["strains"] = [with_images(s) for s in data["strains"]]
+    return data
 
 
 class NewStrain(BaseModel):
@@ -68,7 +96,7 @@ def add_strain(strain: NewStrain):
     }
     data["strains"].append(new_strain)
     save_json(STRAINS_FILE, data)
-    return new_strain
+    return with_images(new_strain)
 
 
 class StrainUpdate(BaseModel):
@@ -85,7 +113,7 @@ def update_strain(strain_id: str, update: StrainUpdate):
             if update.notes is not None:
                 strain["notes"] = update.notes
             save_json(STRAINS_FILE, data)
-            return strain
+            return with_images(strain)
     raise HTTPException(status_code=404, detail="Strain not found")
 
 
@@ -156,4 +184,5 @@ Be technically precise and craft-focused. Include details a passionate home grow
     return result
 
 
+app.mount("/images", StaticFiles(directory=str(BASE / "images")), name="images")
 app.mount("/static", StaticFiles(directory=str(BASE / "static")), name="static")
