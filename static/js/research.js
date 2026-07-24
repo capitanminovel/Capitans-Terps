@@ -30,6 +30,8 @@ async function openDetail(id) {
     onerror="this.parentElement.style.display='none'">`;
   imgWrap.style.display = 'block';
 
+  loadGallery(id, strain);
+
   showOverlay('detail-modal');
 
   if (STATE.researchCache[id]) {
@@ -53,6 +55,37 @@ async function openDetail(id) {
   } catch {
     showGeneratePanel(strain);
   }
+}
+
+// ── Gallery (additional strain photos beyond the main image) ──
+const GALLERY_MAX = 6;
+
+function probeImage(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload  = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = src;
+  });
+}
+
+async function loadGallery(id, strain) {
+  const wrap   = document.getElementById('modal-gallery');
+  const thumbs = document.getElementById('gallery-thumbs');
+  thumbs.innerHTML = '';
+  wrap.classList.add('hidden');
+
+  const candidates = Array.from({ length: GALLERY_MAX }, (_, i) => `/images/strains/${id}-${i + 1}.jpg`);
+  const found = await Promise.all(candidates.map(probeImage));
+  if (STATE.currentId !== id) return;
+
+  const urls = candidates.filter((_, i) => found[i]);
+  if (!urls.length) return;
+
+  thumbs.innerHTML = urls.map(src =>
+    `<img src="${src}" alt="${esc(strain.name)}" onclick="openLightbox(this.src,'${esc(strain.name)}',event)">`
+  ).join('');
+  wrap.classList.remove('hidden');
 }
 
 function closeDetailModal() {

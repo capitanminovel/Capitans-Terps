@@ -435,6 +435,25 @@ select:focus { outline: 1px solid var(--gold-dim); }
   cursor: zoom-in;
 }
 
+/* ── MODAL GALLERY ──────────────────────────────────── */
+.modal-gallery {
+  padding: 0 1.6rem 0.9rem;
+}
+.modal-gallery.hidden { display: none; }
+.gallery-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.gallery-thumbs img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-hi);
+  cursor: zoom-in;
+}
+
 /* ── RESEARCH TABS ──────────────────────────────────── */
 .research-tabs {
   display: flex;
