@@ -15,6 +15,11 @@ function esc(s) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// ── Strain type → CSS class slug ─────────────────────────────
+function typeSlug(t) {
+  return String(t ?? '').trim().replace(/\s+/g, '-');
+}
+
 // ── Toast ─────────────────────────────────────────────────────
 let _toastTimer = null;
 function toast(msg) {

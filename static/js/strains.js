@@ -39,7 +39,7 @@ function renderGrid() {
         </div>
         ${s.lineage ? `<div class="card-lineage">${esc(s.lineage)}</div>` : ''}
         <div class="card-type-row">
-          ${s.type ? `<span class="card-type ${esc(s.type)}">${esc(s.type)}</span>` : ''}
+          ${s.type ? `<span class="card-type ${typeSlug(s.type)}">${esc(s.type)}</span>` : ''}
           ${s.best_for ? s.best_for.split(',').map(b => `<span class="card-best-for">${esc(b.trim())}</span>`).join('') : ''}
         </div>
         ${s.notes ? `<div class="card-notes">${esc(s.notes)}</div>` : ''}
@@ -67,7 +67,9 @@ async function submitAddStrain(e) {
   const body = {
     name:    form.name.value.trim(),
     breeder: form.breeder.value.trim(),
+    lineage: form.lineage.value.trim(),
     status:  form.status.value,
+    type:    form.type.value,
     notes:   form.notes.value.trim(),
   };
   try {

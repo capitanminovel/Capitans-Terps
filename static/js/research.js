@@ -13,7 +13,7 @@ async function openDetail(id) {
 
   const metaEl = document.getElementById('modal-meta');
   if (metaEl) {
-    const typePill    = strain.type     ? `<span class="card-type ${esc(strain.type)}">${esc(strain.type)}</span>` : '';
+    const typePill    = strain.type     ? `<span class="card-type ${typeSlug(strain.type)}">${esc(strain.type)}</span>` : '';
     const bestForPill = strain.best_for ? strain.best_for.split(',').map(b => `<span class="card-best-for">${esc(b.trim())}</span>`).join('') : '';
     metaEl.innerHTML  = typePill + bestForPill;
   }
@@ -23,6 +23,7 @@ async function openDetail(id) {
   tag.className   = `status-tag ${strain.status.replace(' ', '-')}`;
 
   document.getElementById('modal-status-select').value = strain.status;
+  document.getElementById('modal-type-select').value   = strain.type || 'Hybrid';
 
   const imgWrap = document.getElementById('modal-img-wrap');
   imgWrap.innerHTML = `<img src="/images/strains/${id}.jpg" alt="${esc(strain.name)}"
@@ -227,6 +228,36 @@ async function updateStatus() {
     toast('Status updated');
   } catch {
     toast('Failed to update status');
+  }
+}
+
+// ── Type update ────────────────────────────────────────────────
+async function updateType() {
+  if (!STATE.currentId) return;
+  const newType = document.getElementById('modal-type-select').value;
+  const strain  = STATE.allStrains.find(s => s.id === STATE.currentId);
+  if (!strain) return;
+
+  try {
+    const res = await fetch(`/api/strains/${STATE.currentId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: strain.status, type: newType }),
+    });
+    if (!res.ok) throw new Error();
+    strain.type = newType;
+
+    const metaEl = document.getElementById('modal-meta');
+    if (metaEl) {
+      const typePill    = strain.type     ? `<span class="card-type ${typeSlug(strain.type)}">${esc(strain.type)}</span>` : '';
+      const bestForPill = strain.best_for ? strain.best_for.split(',').map(b => `<span class="card-best-for">${esc(b.trim())}</span>`).join('') : '';
+      metaEl.innerHTML  = typePill + bestForPill;
+    }
+
+    renderGrid();
+    toast('Type updated');
+  } catch {
+    toast('Failed to update type');
   }
 }
 

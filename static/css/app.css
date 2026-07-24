@@ -270,9 +270,13 @@ main {
   padding: 0.15rem 0.5rem;
   border-radius: 8px;
 }
-.card-type.Hybrid  { background: #1a1a2e; color: #7878cc; border: 1px solid #3a3a6a; }
-.card-type.Indica  { background: #1a0a2e; color: #a078cc; border: 1px solid #4a2a6a; }
-.card-type.Sativa  { background: #0a2010; color: #60a860; border: 1px solid #2a5a2a; }
+.card-type.Sativa                { background: #0a2010; color: #60a860; border: 1px solid #2a5a2a; }
+.card-type.Sativa-Dominant       { background: #0f1f16; color: #5ea878; border: 1px solid #2f5a3a; }
+.card-type.Sativa-Leaning-Hybrid { background: #14202a; color: #5c98b0; border: 1px solid #2f5468; }
+.card-type.Hybrid                { background: #1a1a2e; color: #7878cc; border: 1px solid #3a3a6a; }
+.card-type.Indica-Leaning-Hybrid { background: #1a1430; color: #8f6fc4; border: 1px solid #40316a; }
+.card-type.Indica-Dominant       { background: #190a28; color: #9878c8; border: 1px solid #472a64; }
+.card-type.Indica                { background: #1a0a2e; color: #a078cc; border: 1px solid #4a2a6a; }
 
 .card-best-for {
   font-size: 0.58rem;

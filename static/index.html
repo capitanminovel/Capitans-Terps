@@ -68,6 +68,18 @@
           </select>
           <button class="btn btn-outline" onclick="updateStatus()">Update</button>
         </div>
+        <div class="status-update-group">
+          <select id="modal-type-select">
+            <option value="Sativa">Sativa</option>
+            <option value="Sativa Dominant">Sativa Dominant</option>
+            <option value="Sativa Leaning Hybrid">Sativa Leaning Hybrid</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Indica Leaning Hybrid">Indica Leaning Hybrid</option>
+            <option value="Indica Dominant">Indica Dominant</option>
+            <option value="Indica">Indica</option>
+          </select>
+          <button class="btn btn-outline" onclick="updateType()">Update</button>
+        </div>
         <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
       </div>
     </div>
@@ -111,12 +123,28 @@
           <input class="form-input" type="text" name="breeder" placeholder="e.g. Archive Seed Bank" required>
         </div>
         <div class="form-group">
+          <label class="form-label">Lineage</label>
+          <input class="form-input" type="text" name="lineage" placeholder="e.g. Dulce De Uva x Starburst F2">
+        </div>
+        <div class="form-group">
           <label class="form-label">Status</label>
           <select class="form-input" name="status">
             <option value="Vault">Vault</option>
             <option value="Active">Active</option>
             <option value="Grow Log">Grow Log</option>
             <option value="Cured">Cured</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type</label>
+          <select class="form-input" name="type">
+            <option value="Sativa">Sativa</option>
+            <option value="Sativa Dominant">Sativa Dominant</option>
+            <option value="Sativa Leaning Hybrid">Sativa Leaning Hybrid</option>
+            <option value="Hybrid" selected>Hybrid</option>
+            <option value="Indica Leaning Hybrid">Indica Leaning Hybrid</option>
+            <option value="Indica Dominant">Indica Dominant</option>
+            <option value="Indica">Indica</option>
           </select>
         </div>
         <div class="form-group">
